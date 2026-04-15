@@ -1,0 +1,52 @@
+ <h1 class="title">
+  熱門食品展覽
+</h1>
+<div class="hs-cards-wrapper">
+  {% for item in module.cards %}
+    
+    {# 判斷連結類型 #}
+    {% set href = item.link_field.url.href %}
+    {% if item.link_field.url.type is equalto "EMAIL_ADDRESS" %}
+      {% set href = "mailto:" + href %}
+    {% elif item.link_field.url.type is equalto "PHONE_NUMBER" %}
+      {% set href = "tel:" + href %}
+    {% endif %}
+
+    {# 動態判斷：如果有連結就用 <a> 包住整張卡片 #}
+    {% if href %}
+      <a href="{{ href }}" 
+         class="hs-card"
+         style="display: block; text-decoration: none; {% if item.image_field.src %}--bg: url('{{ item.image_field.src }}');{% endif %}"
+         {% if item.link_field.open_in_new_tab %}target="_blank"{% endif %}
+         {% if item.link_field.rel %}rel="{{ item.link_field.rel|escape_attr }}"{% endif %}
+      >
+    {% else %}
+      <div class="hs-card"
+         style="{% if item.image_field.src %}--bg: url('{{ item.image_field.src }}');{% endif %}"
+      >
+    {% endif %}
+
+      <div class="hs-card__overlay">
+        <div class="hs-card__bar">
+          <h3 class="hs-card__title">
+            {% inline_text field="text_field" value="{{ item.text_field }}" %}
+          </h3>
+        </div>
+
+        {# 電腦版還是需要面板跟按鈕，但因為外層已經是 <a>，這裡改用 <span> 避免語法衝突 #}
+        <div class="hs-card__panel">
+          <span class="hs-card__btn" {% if not href %}aria-disabled="true" style="opacity: 0.5;"{% endif %}>
+            更多資訊
+          </span>
+        </div>
+      </div>
+
+    {# 閉合標籤 #}
+    {% if href %}
+      </a>
+    {% else %}
+      </div>
+    {% endif %}
+
+  {% endfor %}
+</div>

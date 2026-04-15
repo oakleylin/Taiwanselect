@@ -1,0 +1,146 @@
+/* 外層容器 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&display=swap');
+.custom-category-main-title{
+  font-style: normal !important; /* 防禦主題干擾 */
+  font-family: 'Noto Sans TC'!important;
+  font-size: 56px;
+  font-weight:500;
+  margin-bottom:60px;
+  text-align: center !important;
+}
+.custom-category-grid-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* 網格排版：預設電腦版 4 欄 */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px 20px; /* 上下間距 40px，左右間距 20px */
+}
+
+/* 單個項目 */
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer; /* 讓整個區塊有可點擊的暗示 */
+}
+
+/* 圖片與箭頭的相對定位容器 */
+.category-image-wrapper {
+  position: relative;
+  width: 180px; /* 圓形直徑，可依需求微調 */
+  height: 180px;
+  margin-bottom: 25px; /* 與下方標題的距離，預留箭頭空間 */
+}
+
+/* 圓形圖片區塊 */
+.category-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fff; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 確保圖片填滿圓形並保持比例 */
+.category-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 視圖片性質，若想保留完整圖片不被裁切，可改為 contain */
+}
+
+/* 底部破格綠色箭頭 */
+.category-arrow {
+  position: absolute;
+  bottom: -16px; /* 往下移出圓形一半的距離 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 46px;
+  height: 46px;
+  background-color: #4eb881; /* 擷取圖中的綠色 */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  z-index: 2;
+}
+
+/* 箭頭 SVG 尺寸微調 */
+.category-arrow svg {
+  width: 26px;
+  height: 26px;
+  margin-left: 2px; /* 視覺重心微調 */
+}
+
+/* 標題樣式 */
+.category-title {
+  font-size: 18px;
+  font-weight: 700;
+  color:#17463C;
+  margin: 0;
+  font-family: sans-serif;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+  line-height: 1.4 !important;
+  margin-top: 10px;
+  /* 針對你提到的切掉問題，確保 overflow 是可見的 */
+  overflow: visible !important;
+}
+
+/* 懸停效果 (Hover) - 讓圖片微微浮起 */
+.category-item:hover .category-image-wrapper {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+.category-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.category-link:hover {
+  text-decoration: none !important;
+}
+
+/* ==========================================================================
+   RWD 響應式設定
+   ========================================================================== */
+/* 平板尺寸 (小於 992px)：改為 2 欄 */
+@media (max-width: 992px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 20px;
+  }
+}
+
+/* 手機尺寸 (小於 576px)：維持 2 欄或縮小圖片 (此處設定稍微縮小圖片) */
+@media (max-width: 576px) {
+  .custom-category-main-title{
+  font-size:36px;
+    margin-bottom:30px;
+  }
+  .title{
+     font-size: 36px;
+  margin-bottom:30px;
+  }
+  
+  .category-image-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+  .category-title {
+    font-size: 14px;
+  }
+}

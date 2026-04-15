@@ -1,0 +1,15 @@
+<div class="custom-half-hero">
+  <div class="half-hero-content">
+    <h1 class="half-hero-title">TAIWAN SELECT</h1>
+    <h2 class="half-hero-subtitle">活動列表</h2>
+    
+    {% if module.link_field.url.href %}
+      <a href="{{ module.link_field.url.href }}" 
+         class="half-hero-btn"
+         {% if module.link_field.open_in_new_tab %}target="_blank"{% endif %}
+         {% if module.link_field.no_follow %}rel="nofollow"{% endif %}>
+        {{ module.link_field.link_text || "VIEW MORE" }}
+      </a>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,10 @@
+[ {
+  "id" : "primary_menu_field",
+  "name" : "primary_menu_field",
+  "label" : "Primary menu field",
+  "required" : true,
+  "locked" : false,
+  "display_width" : null,
+  "type" : "menu",
+  "default" : "default"
+} ]

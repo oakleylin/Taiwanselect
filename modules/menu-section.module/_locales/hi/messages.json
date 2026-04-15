@@ -1,0 +1,12 @@
+{
+  "name" : {
+    "message" : "मेन्यू सेक्शन",
+    "description" : "",
+    "placeholders" : null
+  },
+  "primary_menu_field.label" : {
+    "message" : "प्राइमरी मेन्यू फ़ील्ड",
+    "description" : "",
+    "placeholders" : null
+  }
+}

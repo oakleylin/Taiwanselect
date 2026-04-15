@@ -1,0 +1,16 @@
+{# 1. 抓取圖片網址 #}
+{% if module.background_image.src %}
+  {% set bg_image_url = module.background_image.src %}
+{% else %}
+  {% set bg_image_url = "" %}
+{% endif %}
+
+{# 2. 滿版 Banner 容器：這次我們把高度、置中、覆蓋效果全部寫在 style 裡面！ #}
+<div class="custom-full-banner" style="{% if bg_image_url %}background-image: url('{{ bg_image_url }}');{% endif %}">
+  
+  {# 3. 內容容器：加上對應的 class #}
+  <div class="banner-content-container">
+    {# 預留給以後要壓在圖片上的文字 #}
+  </div>
+
+</div>

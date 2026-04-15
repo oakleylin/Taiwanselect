@@ -1,0 +1,157 @@
+{
+  "button_icon.icon_field.label" : {
+    "message" : "Přidat ikonu",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.choices.left" : {
+    "message" : "Doleva",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.choices.right" : {
+    "message" : "Doprava",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.label" : {
+    "message" : "Umístění",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.label" : {
+    "message" : "Ikona",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_link.label" : {
+    "message" : "Odkaz na tlačítko",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.button_icon_toggle.label" : {
+    "message" : "Přidat ikonu",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.button_link_toggle.label" : {
+    "message" : "Použít jako odkaz",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.label" : {
+    "message" : "Možnosti tlačítek",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_text.default" : {
+    "message" : "Sem vložte odkaz na tlačítko",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_text.label" : {
+    "message" : "Text tlačítka",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "button",
+    "description" : "",
+    "placeholders" : null
+  },
+  "spacing_button.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.label" : {
+    "message" : "Style",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.label" : {
+    "message" : "Spacing",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "style.button_size.choices.large" : {
+    "message" : "Velké",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.choices.regular" : {
+    "message" : "Normální",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.choices.small" : {
+    "message" : "Malé",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.label" : {
+    "message" : "Velikost tlačítek",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.primary" : {
+    "message" : "Primární",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.secondary" : {
+    "message" : "Sekundární",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.simple" : {
+    "message" : "Jednoduchý",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.label" : {
+    "message" : "Styl tlačítek",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_1.name" : {
+    "message" : "button",
+    "description" : null,
+    "placeholders" : null
+  }
+}

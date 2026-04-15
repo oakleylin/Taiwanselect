@@ -1,0 +1,30 @@
+/* Logo + Text（左右排列） */
+.logo-text{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Logo */
+.logo-text__logo{
+  display: block;
+  flex-shrink: 0;
+  height: auto;
+  width: auto;
+}
+
+/* Text */
+.logo-text__text{
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1;
+  color: #050505;
+  white-space: nowrap;
+}
+
+/* Link feedback */
+a.logo-text:hover .logo-text__text,
+a.logo-text:focus .logo-text__text{
+  text-decoration: underline;
+}

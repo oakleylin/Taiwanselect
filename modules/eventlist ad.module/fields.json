@@ -1,0 +1,22 @@
+[ {
+  "id" : "abbec219-7e1c-e4db-7889-461553788d0d",
+  "name" : "background_image",
+  "label" : "background_image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "display_width" : null,
+  "type" : "image",
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://50925324.fs1.hubspotusercontent-na1.net/hubfs/50925324/TaiwanSelect/2026%20Eventlist.png",
+    "alt" : "2026 Eventlist",
+    "loading" : "lazy",
+    "width" : 1920,
+    "height" : 200,
+    "max_width" : 1920,
+    "max_height" : 200
+  }
+} ]

@@ -1,0 +1,155 @@
+.partner-card-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:24px;
+}
+
+/* 卡片本體 */
+.partner-card{
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+}
+
+/* 圖片區 */
+.partner-card-image{
+  position:relative;
+   height: 200px;        /* 你要的固定高度 */
+  overflow: hidden;     /* 超出裁掉 */
+}
+
+.partner-card-image img{
+ width: 100%;
+  height: 100%;
+  object-fit: cover;    /* 不變形、裁切 */
+  display: block;
+  transition: transform .35s ease;
+}
+.partner-card:hover .partner-card-image img{
+  transform: scale(1.1);       /* 放大 10% */
+}
+/* 黑色 overlay */
+.partner-card-overlay{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:12px 16px;
+  background:rgba(0,0,0,0.65);
+  color:#fff;
+  font-weight:300;
+  font-size:16px;
+}
+
+/* 內容區 */
+.partner-card-body{
+  padding:16px 0px;
+}
+
+.partner-card-en{
+  font-weight:700;
+  letter-spacing:0.5px;
+  margin-bottom:8px;
+}
+
+.partner-card-desc{
+  color:#555;
+  line-height:1.6;
+  font-size:14px;
+}
+
+.partner-card-divider{
+width:100%;
+  color:grey;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* 1. 改為 2 欄佈局 */
+  .partner-card-grid {
+    grid-template-columns: repeat(2, 1fr) !important; /* 這裡一定要加 */
+    gap: 20px !important;
+    padding: 0 20px; /* 增加兩側間距 */
+  }
+
+  /* 2. 調整圖片高度，介於手機與電腦之間 */
+  .partner-card-image {
+    height: 170px !important; 
+  }
+
+  /* 3. 微調字體大小 */
+  .partner-card-en {
+    font-size: 15px !important;
+  }
+
+  .partner-card-desc {
+    font-size: 13.5px !important;
+  }
+}
+/* RWD */
+/* 手機版 RWD 修正版：只縮減高度，圖片不縮小 */
+@media (max-width: 767px) {
+  /* 1. 卡片置中 */
+  .partner-card-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+
+  .partner-card {
+    width: 90% !important; 
+    max-width: 320px !important;
+    margin: 0 auto 20px auto !important;
+    height: auto !important;
+  }
+
+  /* 2. 圖片高度：強制 130px 且不跳動 */
+  .partner-card-image {
+    height: 130px !important; /* 縮減高度 */
+    overflow: hidden !important;
+  }
+  
+  .partner-card-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* 裁切填滿，不變形 */
+  }
+
+  /* 3. 英文名稱：徹底解決裁切問題 */
+  .partner-card-en {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    
+    /* 強制解除所有可能的裁切設定 */
+    display: block !important;           /* 關鍵：改回 block 就不會被 line-clamp 影響 */
+    -webkit-line-clamp: unset !important; /* 解除行數限制 */
+    -webkit-box-orient: vertical !important;
+    overflow: visible !important;        /* 確保溢出也看得見 */
+    
+    height: auto !important;             /* 高度自動 */
+    min-height: 18px !important;         /* 給予足夠的最小高度 */
+    margin: 0 0 4px 0 !important;
+    padding-bottom: 2px !important;      /* 額外補一點底部的呼吸空間 */
+  }
+
+  /* 4. 描述文字：13px */
+  .partner-card-desc {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    height: auto !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  /* 5. 分隔線調整：不要貼太死 */
+  .partner-card-divider {
+    margin: 8px 0 !important;
+    border: 0 !important;
+    border-top: 1px solid #ddd !important;
+    display: block !important;
+  }
+
+  .partner-card-body {
+    padding: 12px 15px !important;
+  }
+}

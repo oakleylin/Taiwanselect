@@ -1,0 +1,73 @@
+/* ==========================================================================
+   Page Title Banner 頁面標題模組樣式
+   ========================================================================== */
+
+/* 外層容器：控制整體上下間距 */
+.custom-page-title-banner {
+  padding: 20px 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* 內層容器：限制最大寬度、置中對齊，以及底部的灰線 */
+.banner-inner-container {
+  max-width: 1200px; /* 可依據你的網站佈局修改寬度 */
+  margin: 0 auto; 
+  padding: 0 20px; /* 確保手機版時左右有留白，不會貼死邊緣 */
+  border-bottom: 2px solid #e1e1e1; /* 標題下方的那條灰線 */
+  padding-bottom: 10px; /* 標題與底線的距離 */
+}
+
+/* ==========================================================================
+   麵包屑 (Breadcrumb) 樣式
+   ========================================================================== */
+.breadcrumb-container {
+  font-size: 16px; 
+  color: #d7d7d7; 
+  font-weight: 300; 
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.breadcrumb-link{
+color:#555555;
+}
+
+/* ==========================================================================
+   主標題 (Main Title) 樣式
+   ========================================================================== */
+.main-title-container {
+  width: 100%;
+}
+/* 終極暴力解：直接對容器本身下指令，並強制套用到裡面的「所有東西」 */
+.main-title-container,
+.main-title-container * {
+  font-size: 46px !important; /* 👉 這裡改成你要的數字 */
+  font-weight: 700 !important;
+  color: #333333 !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+}
+
+
+/* ==========================================================================
+   響應式設計 (RWD) - 手機版適配
+   ========================================================================== */
+@media (max-width: 768px) {
+  .custom-page-title-banner {
+    padding: 20px 0; /* 手機版上下間距縮小 */
+  }
+  
+  .main-title-container,
+.main-title-container *  {
+    font-size: 30px !important; /* 手機版標題稍微縮小 */
+  }
+  
+  .breadcrumb-container {
+    font-size: 13px; /* 手機版麵包屑稍微縮小 */
+  }
+  .breadcrumb-link{
+  font-size:14px;
+  }
+}

@@ -1,0 +1,24 @@
+<div class="custom-page-title-banner">
+  <div class="banner-inner-container">
+    
+    {# 這裡就是你的開關！如果打勾 (true)，才會執行裡面的東西 #}
+    {% if module.show_breadcrumb %}
+      
+      {# 麵包屑區塊 #}
+      {% if module.breadcrumb_text %}
+        <div class="breadcrumb-container">
+          <p class="breadcrumb-link">
+            {{ module.breadcrumb_text }}
+          </p>
+        </div>
+      {% endif %}
+
+    {% endif %}
+
+    {# 標題區塊 #}
+    <div class="main-title-container">
+      {{ module.title }}
+    </div>
+
+  </div>
+</div>

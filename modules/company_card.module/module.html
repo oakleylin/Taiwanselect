@@ -1,0 +1,39 @@
+{% set TABLE_ID = 227018591 %}
+
+{% set query = "orderBy=sort" %}
+
+{% if module.category %}
+  {% set query = "categories__contains=" ~ module.category ~ "&orderBy=sort" %}
+{% endif %}
+
+{% set rows = hubdb_table_rows(TABLE_ID, query) %}
+
+<div class="partner-card-grid">
+  {% for row in rows %}
+    <div class="partner-card">
+
+      <div class="partner-card-image">
+        <a href="{{ row.url }}" class="partner-card-link">
+        {% if row.image %}
+          <img src="{{ row.image.url }}" alt="{{ row.zhname|escape }}">
+        {% endif %}
+        <div class="partner-card-overlay">
+          {{ row.zhname }}
+        </div>
+          </a>
+      </div>
+
+      <div class="partner-card-body">
+        <div class="partner-card-en">
+          {{ row.enname }}
+        </div>
+        <hr class="partner-card-divider">
+        <div class="partner-card-desc">
+          {{ row.description }}
+        </div>
+        <hr class="partner-card-divider">
+      </div>
+
+    </div>
+  {% endfor %}
+</div>

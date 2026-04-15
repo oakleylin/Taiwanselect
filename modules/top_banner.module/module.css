@@ -1,0 +1,47 @@
+/* ==========================================================================
+   滿版 Banner 電腦版設定
+   ========================================================================== */
+.custom-full-banner {
+  width: 100% !important; 
+  height: 300px !important; /* 電腦版高度 300px */
+  
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-color: #cccccc; /* 預設底色 */
+  
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  box-sizing: border-box;
+}
+
+/* 內容容器的樣式 */
+.banner-content-container {
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  color: #ffffff; 
+  text-align: center;
+}
+
+/* ==========================================================================
+   手機版適配 (螢幕寬度小於 768px 時)
+   ========================================================================== */
+@media (max-width: 768px) {
+ .custom-full-banner {
+    height: 20vh !important; 
+    min-height: 150px !important; /* 加個保險，避免 20vh 在某些怪手機上太扁 */
+  }
+
+  /* 2. 🔥 物理超渡：強制把 HubSpot 外層那些預設的 Padding 歸零 🔥 */
+  .dnd-section,
+  .row-fluid-wrapper,
+  .hs_cos_wrapper_widget {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}

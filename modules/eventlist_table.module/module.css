@@ -1,0 +1,115 @@
+/* ==========================================================================
+   1. 表格整體 (電腦版)
+   ========================================================================== */
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  font-size: 16px;
+  color: #000;
+}
+
+/* 表頭 */
+.event-table th {
+  background: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* 內容格子 */
+.event-table td {
+  background: #ffffff;
+  font-size: 16px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* 覆蓋斑馬紋 */
+.event-table tr:nth-child(even),
+.event-table tr:nth-child(odd) {
+  background: #ffffff;
+}
+
+/* 連結樣式 */
+.event-table a {
+  font-size: 16px;
+  color: #000;
+  text-decoration: none;
+}
+.event-table a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   2. 表格 RWD 手機版 (768px 以下：卡片化、無外框、整齊靠左對齊)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* 強制轉區塊 */
+  .event-table{
+  margin-bottom:30px;
+  }
+  .event-table, 
+  .event-table thead, 
+  .event-table tbody, 
+  .event-table th, 
+  .event-table td, 
+  .event-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  /* 隱藏原本的頂部表頭 */
+  .event-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  /* 每個活動的底部分割線 */
+  .event-table tr {
+    border: none !important; 
+    border-radius: 0 !important;
+    border-bottom: 4px solid #eaeaea !important; 
+    margin-bottom: 0;
+    background: #ffffff;
+  }
+
+  /* 內容靠左對齊，左側留白給標題 */
+  .event-table td{
+    border: none !important; 
+    border-bottom: 1px solid #f2f2f2 !important; 
+    position: relative;
+    padding: 12px 12px 12px 110px !important; /* 留 110px 給左邊標題 */
+    text-align: left !important; /* 內容靠左 */
+    word-break: break-word; 
+    font-size: 14px !important; /* 🔥 強制手機版右側內容 16px */
+  }
+  .event-table td * {
+    font-size: 14px !important;
+    line-height: 1.5 !important; /* 順便加個行高，讓多行文字更好閱讀 */
+  }
+
+  /* 每一區塊的最後一格不要底線 */
+  .event-table td:last-child {
+    border-bottom: 0 !important;
+  }
+
+  /* 左側的標題 (data-label) */
+  .event-table td::before {
+    content: attr(data-label); 
+    position: absolute;
+    left: 12px;
+    top: 12px; /* 靠上對齊 */
+    width: 85px; 
+    text-align: left; 
+    font-weight: 600;
+    color: #333;
+    font-size: 14px !important; /* 🔥 強制手機版左側標題也是 16px */
+  }
+}

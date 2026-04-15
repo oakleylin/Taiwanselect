@@ -1,0 +1,170 @@
+/* ==========================================================================
+   全螢幕輪播圖樣式
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+/* 整個模組的包裝器，設定高度為 100vh (Viewport Height) */
+.custom-fullscreen-slider-wrapper {
+  width: 100%;
+  height: 100vh; /* 滿版高度 */
+  position: relative;
+  overflow: hidden; /* 防止內容溢出 */
+  box-sizing: border-box;
+}
+.slick-slide > div {
+  height: 100%;
+}
+
+/* 個別 Slide 樣式 */
+.slide-item {
+  height: 100%;
+  position: relative;
+}
+/* Slick 容器也必須撐滿高度 */
+.custom-slider,.slick-slide > div {
+  height: 100%;
+}
+
+/* 個別 Slide 樣式 */
+.slide-item {
+  height: 100%;
+  position: relative;
+}
+.slick-list,
+.slick-track {
+  height: 100% !important;
+}
+
+/* 個別 Slide 樣式 */
+.slide-item {
+  height: 100%;
+  position: relative;
+}
+
+/* 背景圖片容器 */
+.slide-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover; /* 圖片完美覆蓋 */
+  background-position: center; /* 圖片置中 */
+  background-repeat: no-repeat;
+}
+
+/* 文字內容遮罩：讓文字置中並在圖片上更清晰 */
+.slide-content-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* 深色半透明遮罩，視需求調整 */
+  display: flex;
+  align-items: center; /* 垂直置中 */
+  justify-content: center; /* 水平置中 */
+}
+
+/* 文字內容內層 */
+.slide-content-inner {
+  text-align: center;
+  color: #ffffff !important; /* 文字預設為白色 */
+  padding: 0 20px;
+  max-width: 800px;
+}
+
+/* 主標題樣式 */
+.slide-title {
+  font-style: normal !important;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  color: #ffffff !important;
+  font-family: 'Noto Sans TC';
+}
+
+/* 副標題樣式 */
+.slide-subtitle {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 0;
+  line-height: 1.6;
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   自定義左右箭頭 (橘色圓圈) 樣式
+   ========================================================================== */
+
+/* 箭頭通用樣式 */
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* 垂直置中 */
+  z-index: 10;
+  width: 50px;
+  height: 50px;
+  background-color: transparent; /* 預設透明 */
+  border: 2px solid #ffffff; /* 預設白色外圈 */
+  border-radius: 50%; /* 圓形 */
+  color: #ffffff; /* 符號顏色 */
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.3s ease; /* 加速動畫 */
+  
+  /* ⚡ 關鍵：預設隱形 (不顯示) ⚡ */
+  opacity: 0; 
+  visibility: hidden;
+}
+
+/* 位置設定 */
+.slick-prev {
+  left: 30px; /* 靠左邊距 */
+}
+
+.slick-next {
+  right: 30px; /* 靠右邊距 */
+}
+
+/* 符號稍微微調，讓它看起來更置中 */
+.arrow-symbol {
+  line-height: 1;
+  position: relative;
+}
+.slick-prev .arrow-symbol { left: -1px; }
+.slick-next .arrow-symbol { left: 1px; }
+
+/* ⚡ 關鍵：Hover 到 Carousell 時顯示箭頭 ⚡ */
+.custom-fullscreen-slider-wrapper:hover .custom-arrow {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ⚡ 關鍵：Hover 到箭頭本身時變成橘色圓圈 ⚡ */
+.custom-arrow:hover {
+  background-color: #f37a5b; /* 你要的橘色包裝 */
+  border-color: #f37a5b; /* 外圈也變橘色 */
+  color: #ffffff; /* 符號維持白色 */
+}
+
+/* ==========================================================================
+   RWD 手機版適配
+   ========================================================================== */
+@media (max-width: 768px) {
+  .custom-fullscreen-slider-wrapper {
+     height: 80vh;
+  }
+  .slide-title {
+    font-size: 24px !important; /* 手機版主標題變小 */
+  }
+  .slide-subtitle {
+    font-size: 16px !important; /* 手機版副標題變小 */
+  }
+  .custom-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}

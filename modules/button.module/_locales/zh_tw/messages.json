@@ -1,0 +1,157 @@
+{
+  "button_icon.icon_field.label" : {
+    "message" : "新增圖示",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.choices.left" : {
+    "message" : "左",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.choices.right" : {
+    "message" : "右",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.label" : {
+    "message" : "位置",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.label" : {
+    "message" : "圖示",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_link.label" : {
+    "message" : "按鈕連結",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.button_icon_toggle.label" : {
+    "message" : "新增圖示",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.button_link_toggle.label" : {
+    "message" : "用作連結",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.label" : {
+    "message" : "按鈕選項",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_text.default" : {
+    "message" : "在此新增按鈕連結",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_text.label" : {
+    "message" : "按鈕文字",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "button",
+    "description" : "",
+    "placeholders" : null
+  },
+  "spacing_button.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.label" : {
+    "message" : "Style",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.label" : {
+    "message" : "Spacing",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "style.button_size.choices.large" : {
+    "message" : "大",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.choices.regular" : {
+    "message" : "正常",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.choices.small" : {
+    "message" : "小",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.label" : {
+    "message" : "按鈕大小",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.primary" : {
+    "message" : "主要",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.secondary" : {
+    "message" : "次要",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.simple" : {
+    "message" : "簡易",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.label" : {
+    "message" : "按鈕樣式",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_1.name" : {
+    "message" : "button",
+    "description" : null,
+    "placeholders" : null
+  }
+}

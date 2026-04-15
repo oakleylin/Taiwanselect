@@ -1,0 +1,29 @@
+{# 1. 抓取圖片網址 #}
+{% if module.background_image.src %}
+  {% set bg_image_url = module.background_image.src %}
+{% else %}
+  {% set bg_image_url = "" %}
+{% endif %}
+
+{# 2. 加上 class，並只保留背景圖這個動態變數在 style 裡 #}
+<div class="custom-full-banner1" style="{% if bg_image_url %}background-image: url('{{ bg_image_url }}');{% endif %}">
+  
+  {# 3. 內容容器 #}
+  <div class="banner-content-container">
+    {# 預留給以後要壓在圖片上的文字 #}
+  </div>
+</div>
+<div>
+  <p class="banner-content-title">
+   ※ 注意：各項活動將於核定後陸續開放報名，本會將依實際情形滾動式調整更新。
+  </p>
+  <p class="banner-content-subtitle">
+  ※歡迎 <a class="banner-content-a" href="https://info.taiwantrade.com/subscription" target="_blank">(按這裡)</a> 訂閱經貿網電子報，接收最新活動消息！
+  </p>
+  <p class="banner-content-desc">
+  連絡電話 TEL: 886-2-27255200
+  </p>
+   <p class="banner-content-desc">
+  （注意：系統為批次更新，*詳情以報名網頁為主，或洽窗口。）
+  </p>
+</div>

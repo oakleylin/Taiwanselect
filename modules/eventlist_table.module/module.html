@@ -1,0 +1,22 @@
+<table class="event-table">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Category</th>
+      <th>Event</th>
+      <th>Date</th>
+      <th>Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in hubdb_table_rows(227018588) %}
+    <tr>
+      <td data-label="No">{{ row.no }}</td>
+      <td data-label="Category">{{ row.category }}</td>
+      <td data-label="Event">{{ row.event }}</td>
+      <td data-label="Date">{{ row.date }}</td>
+      <td data-label="Contact">{{ row.contact }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

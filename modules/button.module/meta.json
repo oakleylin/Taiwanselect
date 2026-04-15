@@ -1,0 +1,11 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "master_language" : "en",
+  "categories" : [ "forms_and_buttons" ],
+  "host_template_types" : [ "PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "module_id" : 209152722986,
+  "label" : "Button",
+  "icon" : "../../../mV0_d-cms-rally-theme_hubspot/cms-rally/images/module-icons/cta.svg",
+  "is_available_for_new_content" : true
+}

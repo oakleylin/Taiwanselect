@@ -1,0 +1,74 @@
+<!--
+  templateType: "global_partial"
+  label: "Website header"
+  isAvailableForNewContent: false
+-->
+{{ require_css(get_asset_url("/TaiwanSelect-theme/css/components/_header.css")) }}
+
+<header class="header">
+  <div class="header__container">
+    <div class="header__left-column">
+
+      <button class="header__menu-toggle no-button" type="button" aria-label="Toggle menu">
+        <svg class="toggle-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round">
+          <line class="bar bar-1" x1="4" y1="8"  x2="24" y2="8"/>
+          <line class="bar bar-2" x1="4" y1="14" x2="24" y2="14"/>
+          <line class="bar bar-3" x1="4" y1="20" x2="24" y2="20"/>
+        </svg>
+      </button>
+
+      <div class="header__site-logo">
+        <a href="https://ap-staging.taitra.org.tw/home">
+          <img src="{{ get_asset_url('../../images/logos/taiwan-select.png') }}" alt="Taiwan Select Logo" loading="eager">
+        </a>
+      </div>
+    </div>
+
+    <nav class="header__navigation" aria-label="Main navigation">
+      <ul class="header__menu">
+        <li><a href="https://ap-staging.taitra.org.tw/home">首頁</a></li>
+        <li><a href="https://ap-staging.taitra.org.tw/eventlist">活動列表</a></li>
+        <li><a href="https://ap-staging.taitra.org.tw/events">熱門食品展</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+window.addEventListener('load', function () {
+  var header  = document.querySelector('.header');
+  var nav     = document.querySelector('.header__navigation');
+  var toggle  = document.querySelector('.header__menu-toggle');
+  if (!header || !nav || !toggle) return;
+
+  var isOpen = false;
+
+  toggle.addEventListener('click', function () {
+    isOpen = !isOpen;
+    if (isOpen) {
+      nav.classList.add('open');
+      toggle.classList.add('is-open');
+      /* ✅ 已經把 document.body.style.overflow = 'hidden' 刪掉了，滾動條會乖乖留著 */
+    } else {
+      nav.classList.remove('open');
+      toggle.classList.remove('is-open');
+      /* ✅ 刪除了復原 overflow 的代碼 */
+    }
+  });
+
+  nav.addEventListener('click', function (e) {
+    if (e.target === nav) {
+      nav.classList.remove('open');
+      toggle.classList.remove('is-open');
+      isOpen = false;
+      /* ✅ 刪除了復原 overflow 的代碼 */
+    }
+  });
+
+  function onScroll() {
+    header.classList.toggle('header--shrink', window.scrollY > 50);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+});
+</script>

@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+
+/* 外層容器 */
+.custom-btn-wrapper {
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* 按鈕主體 - 已改為 <a> 標籤 */
+.custom-sliding-btn {
+  display: inline-block; /* 必須為 inline-block 才能設定內距 */
+  padding: 18px 80px !important; 
+  background-color: rgba(255, 255, 255, 0.4) !important; 
+  border: 1px solid #b54643 !important; /* 增加邊框讓它在白底上更明顯，可依需求移除 */
+  border-radius: 50px; 
+  position: relative; 
+  overflow: hidden; 
+  cursor: pointer;
+  
+  /* 移除超連結預設樣式 */
+  text-decoration: none !important;
+  box-sizing: border-box !important; 
+  transition: all 0.3s ease;
+  
+  /* 修正 Safari 圓角 Bug */
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+/* 文字層 */
+.custom-sliding-btn .btn-text {
+  position: relative;
+  z-index: 2; 
+  color: #333333; 
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  transition: color 0.4s ease;
+  display: block;
+  margin: 0;
+  font-style: normal !important;
+  font-family: 'Noto Sans TC', sans-serif !important;
+}
+
+/* 紅色斜色塊 (::after) */
+.custom-sliding-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%; 
+  height: 100%;
+  background-color: #b54643; 
+  
+  /* 起始位置 */
+  transform: translateX(-120%) skewX(-45deg);
+  transform-origin: top left;
+  
+  z-index: 1; 
+  transition: transform 0.4s ease;
+}
+
+/* Hover 觸發效果 */
+.custom-sliding-btn:hover {
+  transform: translateY(-2px) !important; /* 輕微上浮感 */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.custom-sliding-btn:hover::after {
+  transform: translateX(-20%) skewX(-45deg); 
+}
+
+.custom-sliding-btn:hover .btn-text {
+  color: #ffffff !important; 
+}
+
+/* 手機版適配 */
+@media (max-width: 768px) {
+  .custom-sliding-btn {
+    padding: 14px 40px !important; 
+    max-width: 90%; 
+  }
+  .custom-sliding-btn .btn-text {
+    font-size: 18px; 
+  }
+}

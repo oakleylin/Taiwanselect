@@ -1,0 +1,61 @@
+<!--
+  templateType: "global_partial"
+  label: "Footer"
+  isAvailableForNewContent: false
+-->
+
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Taiwan Select Header</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="ts-header">
+ 
+    <div class="ts-top">
+
+      <!-- Left: Taiwan Select Image -->
+      <div class="ts-brand">
+        <img
+          src="{{ get_asset_url('/AP-TEAM/Projects/TaiwanSelect-theme/images/logos/taiwan-select.png') }}"
+          alt="Taiwan Select"
+          class="ts-logo-img"
+        >
+      </div>
+
+      <!-- Middle: Contact -->
+      <div class="ts-contact">
+        <div>Address : 5 Fl., 333 Keelung Road, Sec. 1, Taipei 11012, Taiwan</div>
+        <div>Tel : +886-2-2725-5200 ext. 1381</div>
+        <div>E-mail : agrifood@taitra.org.tw</div>
+      </div>
+
+      <!-- Right: Organized by -->
+      <div class="ts-org">
+        <div class="ts-org-title">Organized by :</div>
+
+        <div class="ts-org-item">
+          <img src="{{ get_asset_url('/AP-TEAM/Projects/TaiwanSelect-theme/images/logos/ita.png.png') }}" alt="ITA logo">
+          <span>International Trade Administration</span>
+        </div>
+
+        <div class="ts-org-item">
+          <img src="{{ get_asset_url('/AP-TEAM/Projects/TaiwanSelect-theme/images/logos/taitra.png.png') }}" alt="TAITRA logo">
+          <span>Taiwan External Trade Development Council (TAITRA)</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ts-rule"></div>
+
+    <div class="ts-footer">
+      中華民國對外貿易發展協會版權所有 ©2024 TAITRA | All rights reserved.
+    </div>
+  </header>
+</body>
+</html>

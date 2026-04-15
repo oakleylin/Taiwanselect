@@ -1,0 +1,52 @@
+{# 載入 Slick Slider 的 CSS #}
+{{ require_css("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css") }}
+
+<div class="custom-fullscreen-slider-wrapper">
+  
+  {# 輪播主容器 #}
+  <div class="custom-slider" id="homepageSlider">
+    
+    {# 開始迴圈印出每一張 Slide #}
+    {% for item in module.slides %}
+      <div class="slide-item">
+        
+        {# 👇 這裡換成了正確的 item.image_field.src 👇 #}
+        <div class="slide-image" style="background-image: url('{{ item.image_field.src }}');">
+          
+          {# 文字內容遮罩層 #}
+          <div class="slide-content-overlay">
+            <div class="slide-content-inner">
+              
+              {# 👇 這裡換成了正確的 item.title 👇 #}
+              {% if item.title %}
+                <h2 class="slide-title">{{ item.title }}</h2>
+              {% endif %}
+              
+              {# 👇 這裡換成了正確的 item.subtitle 👇 #}
+              {% if item.subtitle %}
+                <p class="slide-subtitle">{{ item.subtitle }}</p>
+              {% endif %}
+              
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    {% endfor %}
+    
+  </div>
+
+  {# 左右橘色箭頭 #}
+  <div class="slider-nav-container">
+    <button type="button" class="slick-prev custom-arrow" aria-label="Previous">
+      <span class="arrow-symbol">&lt;</span>
+    </button>
+    <button type="button" class="slick-next custom-arrow" aria-label="Next">
+      <span class="arrow-symbol">&gt;</span>
+    </button>
+  </div>
+
+</div>
+
+{# 載入 Slick Slider 的 JS (放在 footer) #}
+{{ require_js("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js", "footer") }}

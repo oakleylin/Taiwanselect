@@ -1,0 +1,10 @@
+[ {
+  "id" : "c917522c-a85d-58be-4ec9-4b98c60c4ebd",
+  "name" : "category",
+  "label" : "category",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "display_width" : null,
+  "type" : "text"
+} ]

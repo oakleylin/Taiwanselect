@@ -1,0 +1,8 @@
+{
+  "global" : false,
+  "content_types" : [ "KNOWLEDGE_BASE", "QUOTE_TEMPLATE", "MEMBERSHIP", "LANDING_PAGE", "CASE_STUDY", "SUBSCRIPTION", "SITE_PAGE", "QUOTE_BLUEPRINT", "CUSTOMER_PORTAL", "WEB_INTERACTIVE", "BLOG_LISTING", "BLOG_POST" ],
+  "host_template_types" : [ "PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "module_id" : 209767702281,
+  "icon" : "fontawesome-5.14.0:Alternate%20Long%20Arrow%20Down:SOLID",
+  "is_available_for_new_content" : true
+}

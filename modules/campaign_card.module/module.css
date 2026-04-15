@@ -1,0 +1,190 @@
+/* ==========================================================================
+   外層網格佈局 (鎖定 3 欄大小)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+.title{
+  font-style: normal !important; /* 防禦主題干擾 */
+  font-family: 'Noto Sans TC'!important;
+  font-size: 56px;
+  font-weight:500;
+  margin-bottom:30px;
+  text-align: center !important;
+  color: #ffffff;
+}
+.hs-cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 強制維持 3 欄的寬度 */
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.hs-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 8px; 
+}
+
+/* 背景圖就是在這裡載入的，如果不見了圖片就會消失 */
+.hs-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  transition: transform 500ms ease;
+  will-change: transform;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Hover 觸發背景放大 */
+.hs-card:hover::before,
+.hs-card.is-open::before {
+  transform: scale(1.08);
+}
+
+/* ==========================================================================
+   黑底遮罩與標題內容
+   ========================================================================== */
+.hs-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  width: calc(100% + 1px);
+  height: 100%;
+  left: -0.5px;
+  transform: translate3d(0, calc(100% - 130px), 0);
+  transition: transform 500ms ease;
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+}
+
+.hs-card:hover .hs-card__overlay,
+.hs-card:focus-within .hs-card__overlay,
+.hs-card.is-open .hs-card__overlay {
+  transform: translate3d(0, 0, 0);
+}
+
+.hs-card__bar {
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.hs-card__title {
+  margin-top: 60px;
+  margin-left: 20px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+  font-style: normal !important; /* 防禦主題干擾 */
+  font-family: 'Noto Sans TC'!important;
+  
+}
+
+.hs-card__panel {
+  padding: 12px 14px 14px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.hs-card:hover .hs-card__panel,
+.hs-card:focus-within .hs-card__panel,
+.hs-card.is-open .hs-card__panel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   按鈕樣式
+   ========================================================================== */
+.hs-card__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-decoration: none !important;
+  border: none;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.hs-card__btn:hover {
+  background: #000;
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+@media (max-width: 992px) {
+  .hs-cards-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+.hs-cards-wrapper {
+    grid-template-columns: 1fr;
+    max-width: 360px; /* 限制寬度，避免太寬 */
+    margin: 0 auto;   /* 畫面置中 */
+    gap: 16px; 
+    padding: 20px 16px;
+  }
+
+  .hs-card {
+    aspect-ratio: 16 / 9; /* 手機版改為較扁的比例 */
+  }
+
+  /* 2. 主標題縮小 */
+  .title {
+    font-size: 32px !important; 
+    margin-bottom: 20px;
+  }
+
+  /* 3. ★關鍵：手機版取消黑底與滑動動畫，改為底部固定漸層★ */
+  .hs-card__overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%) !important; 
+    transform: none !important; /* 強制取消位移，直接固定 */
+    justify-content: flex-end;  /* 讓內容自動靠齊底部 */
+    padding-bottom: 24px;
+  }
+
+  /* 確保手機點擊時也不會觸發滑動 */
+  .hs-card:hover .hs-card__overlay,
+  .hs-card:focus-within .hs-card__overlay,
+  .hs-card.is-open .hs-card__overlay {
+    transform: none !important;
+  }
+
+  /* 4. 標題位置調整 */
+  .hs-card__title {
+    font-size: 20px; 
+    margin: 0 !important; /* 取消原本電腦版的 margin-top: 60px */
+    margin-left: 20px !important;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.6); /* 加陰影防白底看不見字 */
+  }
+
+  /* 5. 手機版直接隱藏按鈕區塊 */
+  .hs-card__panel {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   卡片本體與背景圖片設定
+   ========================================================================== */

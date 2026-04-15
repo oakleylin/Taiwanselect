@@ -1,0 +1,11 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "master_language" : "en",
+  "categories" : [ "functionality" ],
+  "host_template_types" : [ "PAGE", "BLOG_POST", "BLOG_LISTING" ],
+  "module_id" : 209152603318,
+  "label" : "Menu",
+  "icon" : "../../../mV0_d-cms-rally-theme_hubspot/cms-rally/images/module-icons/certification.svg",
+  "is_available_for_new_content" : false
+}

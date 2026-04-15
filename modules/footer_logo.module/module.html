@@ -1,0 +1,48 @@
+{# ---------- Logo + Text Row Module ---------- #}
+
+{% set href = module.link_field.url.href %}
+{% set open_new = module.new_tab %}
+
+{% set logo_h = module.logo_height %}
+{% if not logo_h %}
+  {% set logo_h = 28 %}
+{% endif %}
+
+{% if href %}
+  <a
+    class="logo-text {{ module.extra_class }}"
+    href="{{ href }}"
+    {% if open_new %}target="_blank" rel="noopener"{% endif %}
+    aria-label="{{ module.text_field|default('') }}"
+  >
+    {% if module.logo_field.src %}
+      <img
+        class="logo-text__logo"
+        src="{{ module.logo_field.src }}"
+        alt="{{ module.logo_field.alt|default('') }}"
+        loading="lazy"
+        style="height: {{ logo_h }}px;"
+      >
+    {% endif %}
+
+    {% if module.text_field %}
+      <span class="logo-text__text">{{ module.text_field }}</span>
+    {% endif %}
+  </a>
+{% else %}
+  <div class="logo-text {{ module.extra_class }}">
+    {% if module.logo_field.src %}
+      <img
+        class="logo-text__logo"
+     src="{{ module.logo_field.src }}"
+     alt="{{ module.logo_field.alt|default('') }}"
+     loading="lazy"
+     style="height: {{ module.logo_height|default(28) }}px;"
+      >
+    {% endif %}
+
+    {% if module.text_field %}
+      <span class="logo-text__text">{{ module.text_field }}</span>
+    {% endif %}
+  </div>
+{% endif %}

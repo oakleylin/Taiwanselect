@@ -1,0 +1,24 @@
+[ {
+  "id" : "3e43fe2e-f295-274b-13cc-e15bed40513c",
+  "name" : "logo_field",
+  "label" : "Logo",
+  "required" : false,
+  "locked" : false,
+  "show_loading" : false,
+  "display_width" : null,
+  "type" : "logo",
+  "default" : {
+    "override_inherited_src" : false,
+    "src" : null,
+    "alt" : null
+  }
+}, {
+  "id" : "a4bcdb3e-9ace-14bf-d3b1-27c7b1a8052e",
+  "name" : "text_field",
+  "label" : "Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "display_width" : null,
+  "type" : "text"
+} ]

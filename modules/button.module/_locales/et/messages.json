@@ -1,0 +1,157 @@
+{
+  "button_icon.icon_field.label" : {
+    "message" : "Lisa ikoon",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.choices.left" : {
+    "message" : "Vasakul",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.choices.right" : {
+    "message" : "Paremal",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.label" : {
+    "message" : "Paigutus",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.label" : {
+    "message" : "Ikoon",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_link.label" : {
+    "message" : "Nupu link",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.button_icon_toggle.label" : {
+    "message" : "Lisa ikoon",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.button_link_toggle.label" : {
+    "message" : "Kasuta lingina",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.label" : {
+    "message" : "Nupu valikud",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_text.default" : {
+    "message" : "Lisage nupu link siia",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_text.label" : {
+    "message" : "Nupu tekst",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "button",
+    "description" : "",
+    "placeholders" : null
+  },
+  "spacing_button.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.label" : {
+    "message" : "Style",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.label" : {
+    "message" : "Spacing",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "style.button_size.choices.large" : {
+    "message" : "Suur",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.choices.regular" : {
+    "message" : "Tavaline",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.choices.small" : {
+    "message" : "Väike",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.label" : {
+    "message" : "Nupu suurus",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.primary" : {
+    "message" : "Primaarne",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.secondary" : {
+    "message" : "Sekundaarne",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.simple" : {
+    "message" : "Lihtne",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.label" : {
+    "message" : "Nupu stiil",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_1.name" : {
+    "message" : "button",
+    "description" : null,
+    "placeholders" : null
+  }
+}

@@ -1,0 +1,103 @@
+/* 載入無襯線字體 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&display=swap');
+
+/* ==========================================================================
+   外層容器：50vh 高度並置中
+   ========================================================================== */
+.custom-half-hero {
+  width: 100%;
+  height: 50vh; 
+  background-color: #ffffff; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+/* 內容容器 */
+.half-hero-content {
+  text-align: center;
+}
+
+/* ==========================================================================
+   文字樣式
+   ========================================================================== */
+.half-hero-title {
+  font-size: 64px;
+  font-weight: 900; /* 加粗到 900 更顯眼 */
+  color: #000000 !important;
+  margin: 0 0 15px 0;
+  letter-spacing: 2px;
+  font-family: 'Noto Sans TC', sans-serif !important;
+  line-height: 1.2;
+}
+
+.half-hero-subtitle {
+  font-size: 38px;
+  font-weight: 700;
+  color: #000000 !important;
+  margin: 0 0 45px 0;
+  font-family: 'Noto Sans TC', sans-serif !important;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   磚紅色 VIEW MORE 按鈕 (對應 HubL 的 link_field)
+   ========================================================================== */
+.half-hero-btn {
+  /* 關鍵：改用 inline-flex 確保內容撐開且置中 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  background-color: #b54643 !important; 
+  color: #ffffff !important;
+  
+  /* 移除所有預設連結樣式 */
+  text-decoration: none !important;
+  border: none !important;
+  outline: none;
+  
+  font-size: 24px; /* 微調大小 */
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 18px 60px;
+  border-radius: 50px; 
+  
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  font-family: 'Noto Sans TC', sans-serif !important;
+}
+
+/* 滑鼠移上去的動態效果 */
+.half-hero-btn:hover, 
+.half-hero-btn:focus {
+  background-color: #9a3b38 !important; 
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transform: translateY(-2px); /* 增加一個往上飄的小細節 */
+  box-shadow: 0 5px 15px rgba(181, 70, 67, 0.3); /* 增加陰影感 */
+}
+
+/* ==========================================================================
+   RWD 手機版適配
+   ========================================================================== */
+@media (max-width: 768px) {
+  .custom-half-hero {
+    height: auto; /* 手機版高度自動 */
+    padding: 60px 20px;
+  }
+  .half-hero-title {
+    font-size: 40px;
+  }
+  .half-hero-subtitle {
+    font-size: 28px;
+    margin: 0 0 35px 0;
+  }
+  .half-hero-btn {
+    padding: 15px 40px;
+    font-size: 18px;
+    width: 80%; /* 手機版按鈕大一點比較好按 */
+  }
+}

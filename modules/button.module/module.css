@@ -1,0 +1,60 @@
+/* 1. 外層容器：確保按鈕水平置中 */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0; /* 給按鈕一點上下呼吸空間 */
+  clear: both;
+}
+
+/* 2. 按鈕基礎樣式 */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 999px; /* 預設圓角 */
+  background-color: #000; /* 這裡可自行修改預設顏色 */
+  color: #fff;
+}
+
+/* 3. 小按鈕 = 正圓形 */
+.button.button--small {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0 !important;
+  border-radius: 50%;
+}
+
+/* 4. 大按鈕 = 指定尺寸 */
+.button.button--large {
+  width: 230px;
+  height: 80px;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 0;
+  margin-top: 10px;
+}
+
+/* 5. 修正內文與 Icon 擠壓問題 */
+.button__icon {
+  margin: 0 5px;
+}
+
+.button--small .button__icon {
+  margin: 0; /* 小按鈕 icon 置中 */
+}
+
+/* 6. RWD 調整：在手機上如果 330px 太寬，自動縮小一點 */
+@media (max-width: 480px) {
+  .button.button--large {
+    width: 280px; 
+    height: 80px;
+    font-size: 20px;
+  }
+}

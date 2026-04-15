@@ -1,0 +1,88 @@
+/* 外層深色背景 */
+.custom-footer-nav {
+  background-color: #1a1a1a; /* 對應圖片的深灰色背景 */
+  padding: 50px 0;
+  width: 100%;
+}
+
+/* 內層容器：限制寬度並設定相對定位，讓橘色按鈕可以靠右對齊 */
+.footer-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative; 
+  display: flex;
+  justify-content: center; /* 讓中間的連結置中 */
+  align-items: center;
+}
+
+/* 連結列表的排版 */
+.footer-links {
+  display: flex;
+  gap: 150px; /* 連結與連結之間的距離 */
+}
+
+/* 個別連結的樣式 */
+.footer-link {
+color: #d7d7d7 !important;
+  text-decoration: none !important; /* 確保預設無底線 */
+  font-size: 26px;
+  font-weight: 700;
+  transition: color 0.3s ease;
+  border-bottom: none !important; /* 有些主題會用 border-bottom 模擬底線，一併去掉 */
+}
+
+.footer-link:hover {
+color: #f37a5b !important; /* 確保顏色優先級 */
+  text-decoration: none !important; /* 強制去掉底線 */
+  border-bottom: none !important;  /* 確保沒有邊框底線 */
+  outline: none !important;        /* 去掉點擊時的外框 */
+}
+
+/* 橘色回到最上方按鈕 */
+.back-to-top {
+  position: absolute; /* 絕對定位 */
+  right: 20px; /* 靠右邊 */
+  width: 50px;
+  height: 50px;
+  background-color: #f37a5b; /* 圖片中的橘色 */
+  border-radius: 50%; /* 變成圓形 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.back-to-top:hover {
+background-color: #d96245; 
+  transform: translateY(-3px); 
+  text-decoration: none !important; /* 預防按鈕也出現底線 */
+}
+
+/* 控制 SVG 箭頭的大小 */
+.back-to-top svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* 手機版 RWD 適配 */
+@media (max-width: 768px) {
+  .footer-nav-inner {
+    flex-direction: column;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px !important;
+  }
+  
+  /* 手機版時，把橘色按鈕放到連結的正下方置中，而不是黏在右邊 */
+  .back-to-top {
+    position: static; 
+  }
+}

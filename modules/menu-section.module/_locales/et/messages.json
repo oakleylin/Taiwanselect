@@ -1,0 +1,12 @@
+{
+  "name" : {
+    "message" : "Menüü jaotis",
+    "description" : "",
+    "placeholders" : null
+  },
+  "primary_menu_field.label" : {
+    "message" : "Primaarse menüü väli",
+    "description" : "",
+    "placeholders" : null
+  }
+}

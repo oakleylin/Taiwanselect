@@ -1,0 +1,72 @@
+.custom-full-banner1 {
+  width: 100% !important; /* 滿版寬度 */
+  height: 130px !important; /* 👉 你要的 30px 高度在這裡！ */
+  
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-color: #333333; 
+  
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  box-sizing: border-box;
+}
+
+.banner-content-container {
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  color: #ffffff; 
+  text-align: center;
+}
+.banner-content-title{
+  margin-top:20px;
+  font-size:22px;
+  color:#FF0000;
+  font-weight:600;
+  font-style: italic;
+}
+/* 外層段落設定 */
+.banner-content-subtitle {
+  margin-top: 20px; /* 這裡推一次距離就好，整行就會一起往下 */
+  font-size: 22px;
+  color: #000000;
+  font-weight: 600;
+  font-style: italic; /* 這裡設定斜體，裡面的 <a> 就會跟著變斜體 */
+}
+
+/* 連結獨立設定 */
+.banner-content-a {
+  color: #000000; /* 強制設定黑色，蓋掉瀏覽器預設的藍色連結 */
+  text-decoration: underline; /* 連結的底線，如果不要底線可以改成 none */
+  font-style: italic;
+  /* ❌ 把 margin-top, font-size, font-style 全部刪除，讓它乖乖跟著文字排版 */
+}
+
+/* 💡 建議加個 Hover (滑鼠移入) 效果，這樣大家才看懂它是可以點的按鈕 */
+.banner-content-a:hover {
+  color: #555555; /* 滑入時變成深灰色 */
+  font-style: italic;
+}
+.banner-content-desc{
+   font-size: 18px;
+color: #555555;
+  font-weight: 600;
+}
+
+/* 手機版適配 */
+@media (max-width: 768px) {
+  .custom-full-banner1 {
+    height: 50px !important; /* 👉 手機版也維持 30px，才不會突然變胖 */
+  }
+  .banner-content-title {
+  margin-top: 5px; /* 這裡推一次距離就好，整行就會一起往下 */
+    font-size: 18px;}
+  .banner-content-subtitle {
+  margin-top: 5px; /* 這裡推一次距離就好，整行就會一起往下 */
+    font-size: 18px;}
+  .banner-content-desc{
+    font-size: 16px;}
+}

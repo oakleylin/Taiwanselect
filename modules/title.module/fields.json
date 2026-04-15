@@ -1,0 +1,29 @@
+[ {
+  "id" : "5e9e6435-3911-c3b0-34d5-79771e4ac7d5",
+  "name" : "breadcrumb_text",
+  "label" : "breadcrumb_text",
+  "required" : false,
+  "locked" : false,
+  "display_width" : null,
+  "type" : "richtext",
+  "default" : "回首頁"
+}, {
+  "id" : "2d46808a-3bf4-4d25-6382-1a1df3401c04",
+  "name" : "title",
+  "label" : "title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "display_width" : null,
+  "type" : "text"
+}, {
+  "id" : "7c16ac71-a9aa-7e68-e9f7-3b04ccd65bde",
+  "name" : "show_breadcrumb",
+  "label" : "show_breadcrumb",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "display_width" : null,
+  "type" : "boolean",
+  "default" : true
+} ]

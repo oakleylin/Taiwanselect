@@ -1,0 +1,196 @@
+/* ===============================
+   Header Base
+================================ */
+.header { position: relative; z-index: 99999; }
+
+.header__container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  max-width: none !important;
+  margin: 0 !important;
+  transform: none !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 20px 48px !important;
+  background-color: transparent !important;
+  transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease !important;
+  /* 容器層級 */
+  z-index: 100005 !important;
+}
+
+/* ===============================
+   Left Column
+================================ */
+.header__left-column {
+  display: flex !important;
+  align-items: center !important;
+  gap: 24px !important;
+  min-width: 0 !important;
+}
+
+/* ===============================
+   Site Logo — 層級最低，會被 Menu 蓋住
+================================ */
+.header__site-logo {
+  display: block !important;
+  flex: 0 0 auto !important;
+  line-height: 1 !important;
+  position: relative !important;
+  /* ✅ 層級設在 menu 之下 */
+  z-index: 100010 !important;
+}
+.header__site-logo a { display: block !important; line-height: 1 !important; }
+.header__site-logo img {
+  display: block !important;
+  height: 80px !important;
+  width: auto !important;
+  max-width: 280px !important;
+  object-fit: contain !important;
+  transition: height 0.3s ease !important;
+}
+
+/* ===============================
+   漢堡/X 合一按鈕 — 層級最高，永遠點得到
+================================ */
+.header__menu-toggle {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  /* ✅ 層級最高，確保不會被 menu 蓋住 */
+  z-index: 100020 !important;
+}
+
+/* ===============================
+   🔥 修復 SVG 三條線動畫 🔥
+================================ */
+.toggle-icon .bar {
+  /* ✅ 關鍵修復：強制 transform 的中心點對齊線條本身的中心，而不是整張畫布 */
+  transform-box: fill-box !important;
+  transform-origin: center !important;
+  transition: transform 0.3s ease, opacity 0.3s ease !important;
+}
+
+/* 預設：漢堡 */
+.toggle-icon .bar-1 { transform: translateY(0) rotate(0deg); }
+.toggle-icon .bar-2 { opacity: 1; transform: scaleX(1); }
+.toggle-icon .bar-3 { transform: translateY(0) rotate(0deg); }
+
+/* 打開：完美的叉叉 */
+.header__menu-toggle.is-open .bar-1 {
+  transform: translateY(6px) rotate(45deg) !important;
+}
+.header__menu-toggle.is-open .bar-2 {
+  opacity: 0 !important;
+  transform: scaleX(0) !important;
+}
+.header__menu-toggle.is-open .bar-3 {
+  transform: translateY(-6px) rotate(-45deg) !important;
+}
+
+/* ===============================
+   Navigation Panel — 層級在 Logo 之上
+================================ */
+.header__navigation {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100vh !important;
+  width: min(85vw, 320px) !important;
+  padding: 120px 32px 40px !important;
+  background: rgba(0, 0, 0, 0.75) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  transform: translateX(-100%) !important;
+  transition: transform 0.3s ease !important;
+  /* ✅ 層級高於 Logo，但低於按鈕 */
+  z-index: 100015 !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+}
+.header__navigation.open {
+  transform: translateX(0) !important;
+}
+
+/* 背景遮罩 */
+.header__navigation::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.3s ease !important;
+  z-index: -1 !important;
+}
+.header__navigation.open::before {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* ===============================
+   Menu List
+================================ */
+.header__menu {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  width: 100% !important;
+}
+.header__menu li a {
+  display: block !important;
+  padding: 14px 0 !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  transition: opacity 0.2s ease !important;
+}
+.header__menu li a:hover {
+  opacity: 0.65 !important;
+}
+
+/* ===============================
+   Shrink on Scroll
+================================ */
+.header.header--shrink .header__container {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+.header.header--shrink .header__site-logo img {
+  height: 48px !important;
+}
+
+/* ===============================
+   Responsive
+================================ */
+@media (max-width: 1200px) {
+  .header__container { padding: 20px 24px !important; }
+}
+@media (max-width: 768px) {
+  .header__container { padding: 16px 20px !important; }
+  .header.header--shrink .header__container {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+  .header__site-logo img { height: 56px !important; }
+  .header.header--shrink .header__site-logo img { height: 40px !important; }
+  .header__navigation { padding-top: 100px !important; }
+}

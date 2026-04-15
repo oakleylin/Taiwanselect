@@ -1,0 +1,279 @@
+:root {
+  --orange: #EF6C3D;
+  --text: #111;
+  --muted: #333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: #fff;
+}
+.ts-nav-container {
+  background-color: #121212;
+  width: 100%;
+  /* 關鍵：設定高度為視窗高度的 10% */
+  height: 10vh; 
+  
+  /* 讓內部的 ul 垂直置中 */
+  display: flex;
+  align-items: center;
+  
+  /* 固定在頁面頂端 (可選，若你希望捲動時它留著) */
+  position: relative; 
+  z-index: 1000;
+  margin-bottom: 20px;
+}
+
+.ts-black {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center;     /* 垂直置中 */
+  list-style: none;
+  margin: 0;
+  padding: 0; /* 移除原本的 padding，改由容器高度控制 */
+}
+
+.ts-black li {
+  margin: 0 25px;
+}
+
+.ts-black li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "PingFang TC", sans-serif;
+  display: block; 
+  padding: 10px 20px; /* 增加點擊區域 */
+  transition: all 0.3s ease;
+}
+
+/* 滑鼠懸停效果 */
+.ts-black li a:hover {
+  color: #cccccc;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+
+/* 導覽列容器 */
+.ts-nav-wrapper {
+  background-color: #121212; /* 深黑色底 */
+  width: 100%;
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5); /* 增加一點點深度感 */
+}
+
+/* 列表設定 */
+.ts-nav-list {
+  display: flex;
+  list-style: none; /* 移除點點 */
+  margin: 0;
+  padding: 0;
+}
+
+/* 每個選項的間距 */
+.ts-nav-item {
+  margin: 0 20px; 
+}
+
+/* 連結樣式：UI/UX 優化重點 */
+.ts-nav-link {
+  display: block;
+  color: #FFFFFF;
+  text-decoration: none; /* 移除底線 */
+  font-size: 16px;
+  font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-weight: 500;
+  padding: 20px 15px; /* 增加上下 Padding 讓點擊範圍變大 */
+  transition: all 0.3s ease; /* 平滑過渡 */
+  letter-spacing: 0.5px;
+}
+
+/* 滑鼠懸停與點擊效果 */
+.ts-nav-link:hover {
+  color: #AAAAAA; /* 文字稍微變淡 */
+  background-color: rgba(255, 255, 255, 0.05); /* 增加極淡的背景反饋 */
+}
+
+/* 手機版響應式設定 (Media Query) */
+@media (max-width: 768px) {
+  .ts-nav-item {
+    margin: 0 10px; /* 在小螢幕縮小間距防止溢出 */
+  }
+  .ts-nav-link {
+    font-size: 14px;
+    padding: 15px 10px;
+  }
+}
+/* ===== Header Container ===== */
+.ts-header {
+  width: 100%;
+  padding: 30px 60px 30px;
+}
+
+/* ===== Top Layout ===== */
+.ts-top {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 36px;
+}
+
+/* ===== Left Logo ===== */
+.ts-brand {
+  min-width: 260px;
+}
+
+.ts-logo {
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: 1px;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+.ts-logo-img {
+  width: 250px;   /* 👈 從這個數字開始調 */
+  height: auto;
+}
+/* ===== Middle Contact ===== */
+.ts-contact {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  padding-top: 10px;
+  white-space: nowrap;
+}
+
+/* ===== Right Organized By ===== */
+.ts-org {
+  min-width: 520px;
+  font-size: 14px;
+}
+
+.ts-org-title {
+  margin-bottom: 10px;
+}
+
+.ts-org-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+.ts-org-item img {
+  width: 30px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ===== Divider ===== */
+.ts-rule {
+  max-width: 1600px;
+  height: 1px;
+  background: #111;
+  margin: 18px auto 10px;
+}
+
+/* ===== Footer ===== */
+.ts-footer {
+  max-width: 1600px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+/* ===== RWD 終極修正版：解決版面撐破與置中問題 ===== */
+@media (max-width: 1024px) {
+  /* 1. 外層容器：確保左右留白，取消居中 */
+  .ts-header {
+    padding: 20px 5% !important; 
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* 2. 讓三大區塊垂直排列並【靠左對齊】 */
+  .ts-top {
+    flex-direction: column !important;
+    align-items: flex-start !important; /* 👈 改為靠左 */
+    gap: 20px !important; 
+    width: 100%;
+  }
+
+  /* 3. Logo 等比例縮小並靠左 */
+  .ts-brand {
+    text-align: left !important;
+  }
+  .ts-logo-img {
+    width: 160px !important; 
+    height: auto !important;
+    display: block;
+    margin-left: 0 !important; /* 確保沒有被外層置中影響 */
+  }
+
+  /* 4. 全域字體 12px 並【靠左對齊】 */
+  .ts-contact, 
+  .ts-org, 
+  .ts-org-title, 
+  .ts-footer {
+    min-width: 0 !important;
+    width: 100%;
+    text-align: left !important; /* 👈 全部改靠左 */
+    font-size: 12px !important;
+  }
+
+  /* 5. 聯絡資訊：自然折行，縮減行間距 */
+  .ts-contact {
+    white-space: normal !important;
+    line-height: 1.5 !important;
+    padding-top: 0 !important;
+  }
+
+  .ts-contact div {
+    margin-bottom: 4px !important;
+  }
+
+  /* 6. 主辦單位項目：圖示與文字水平並排且【靠左】 */
+  .ts-org-item {
+    flex-direction: row !important; /* 👈 改回橫向排列，靠左比較好看 */
+    align-items: center !important;
+    justify-content: flex-start !important; /* 👈 靠左 */
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+    white-space: normal !important;
+  }
+  
+  .ts-org-item img {
+    width: 24px !important; /* 手機版圖示再縮小一點點 */
+    height: auto;
+  }
+
+  /* 7. 分隔線與版權宣告：全部靠左 */
+  .ts-rule {
+    width: 100%;
+    margin: 16px 0 10px 0 !important; /* 移除 auto，確保不置中 */
+    background: #111;
+  }
+
+  .ts-footer {
+    text-align: left !important; /* 👈 版權宣告靠左 */
+    line-height: 1.4;
+    font-size: 12px !important;
+  }
+}

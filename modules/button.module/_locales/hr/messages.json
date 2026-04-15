@@ -1,0 +1,157 @@
+{
+  "button_icon.icon_field.label" : {
+    "message" : "Dodaj ikonu",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.choices.left" : {
+    "message" : "Lijevo",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.choices.right" : {
+    "message" : "Desno",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.icon_position.label" : {
+    "message" : "Položaj",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_icon.label" : {
+    "message" : "Ikona",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_link.label" : {
+    "message" : "Veza gumba",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.button_icon_toggle.label" : {
+    "message" : "Dodaj ikonu",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.button_link_toggle.label" : {
+    "message" : "Upotrijebi kao vezu",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_options.label" : {
+    "message" : "Opcije gumba",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_text.default" : {
+    "message" : "Ovdje dodajte poveznicu gumba",
+    "description" : "",
+    "placeholders" : null
+  },
+  "button_text.label" : {
+    "message" : "Tekst gumba",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "button",
+    "description" : "",
+    "placeholders" : null
+  },
+  "spacing_button.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.label" : {
+    "message" : "Style",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.label" : {
+    "message" : "Spacing",
+    "description" : null,
+    "placeholders" : null
+  },
+  "spacing_button.spacing_field.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "style.button_size.choices.large" : {
+    "message" : "Velika",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.choices.regular" : {
+    "message" : "Uobičajena",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.choices.small" : {
+    "message" : "Mala",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_size.label" : {
+    "message" : "Veličina gumba",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.primary" : {
+    "message" : "Primarno",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.secondary" : {
+    "message" : "Sekundarno",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.choices.simple" : {
+    "message" : "Jednostavno",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style.button_type.label" : {
+    "message" : "Stil gumba",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_1.name" : {
+    "message" : "button",
+    "description" : null,
+    "placeholders" : null
+  }
+}
