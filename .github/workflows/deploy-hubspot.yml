@@ -23,7 +23,10 @@ jobs:
       - name: Install HubSpot CLI
         run: npm install -g @hubspot/cli@8.2.0
 
-      # ── 寫入設定檔到兩個位置，並驗證帳號是否正確載入 ──
+      # ── 寫入設定檔（使用 CLI v8 正確格式） ──────────
+      # 本機 config 使用 defaultAccount / accounts / accountId
+      # 且必須有 auth.tokenInfo 區塊，否則 CLI 會 crash
+      # expiresAt 設為過去時間，讓 CLI 使用 personalAccessKey 重新取得 token
       - name: Configure HubSpot CLI authentication
         env:
           HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
@@ -31,20 +34,29 @@ jobs:
         run: |
           mkdir -p "$HOME/.hscli"
 
-          # 使用 printf 寫入 ~/.hscli/config.yml
-          printf 'defaultPortal: taitra\nportals:\n  - name: taitra\n    portalId: %s\n    authType: personalaccesskey\n    personalAccessKey: %s\n' \
-            "${HUBSPOT_PORTAL_ID}" \
-            "${HUBSPOT_PERSONAL_ACCESS_KEY}" \
-            > "$HOME/.hscli/config.yml"
+          cat > "$HOME/.hscli/config.yml" << HSEOF
+          defaultAccount: taitra
+          accounts:
+            - name: taitra
+              accountId: ${HUBSPOT_PORTAL_ID}
+              env: prod
+              authType: personalaccesskey
+              accountType: STANDARD
+              personalAccessKey: ${HUBSPOT_PERSONAL_ACCESS_KEY}
+              auth:
+                tokenInfo:
+                  accessToken: ''
+                  expiresAt: '2000-01-01T00:00:00.000Z'
+          HSEOF
 
-          # 同時複製到專案根目錄（CLI v8+ 優先讀此位置）
+          # 同時複製到專案根目錄
           cp "$HOME/.hscli/config.yml" hubspot.config.yml
 
-          echo "=== ~/.hscli/config.yml (key masked) ==="
+          echo "=== config.yml (key masked) ==="
           sed 's/personalAccessKey:.*/personalAccessKey: ***MASKED***/' "$HOME/.hscli/config.yml"
 
-          echo "=== hs accounts list (驗證帳號是否正確載入) ==="
-          hs accounts list || echo "[WARN] hs accounts list 執行失敗"
+          echo "=== hs accounts list ==="
+          hs accounts list || echo "[WARN] hs accounts list 失敗"
 
       # ── 上傳主題 ──
       - name: Upload theme to HubSpot Design Manager
