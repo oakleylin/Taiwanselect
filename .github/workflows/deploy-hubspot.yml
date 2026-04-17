@@ -27,9 +27,9 @@ jobs:
         with:
           node-version: '20'
 
-      # ── Step 3：安裝 HubSpot CLI ────────────────
+      # ── Step 3：安裝 HubSpot CLI（鎖定與本地相同版本） ──
       - name: Install HubSpot CLI
-        run: npm install -g @hubspot/cli
+        run: npm install -g @hubspot/cli@8.2.0
 
       # ── Step 4：（選用）安裝專案依賴並打包 ─────
       # 若你的主題不需要 build 步驟，可將此區塊刪除
@@ -39,41 +39,29 @@ jobs:
       #     npm run build
 
       # ── Step 5：寫入 HubSpot 驗證設定 ──────────
-      # CLI v8+ 優先讀取專案根目錄的 hubspot.config.yml
-      # 同時也寫入 ~/.hscli/config.yml 作為備用
+      # 只寫到 ~/.hscli/config.yml，避免與專案根目錄衝突
       - name: Configure HubSpot CLI authentication
         env:
           HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
           HUBSPOT_PORTAL_ID: ${{ secrets.HUBSPOT_PORTAL_ID }}
         run: |
-          CONFIG_CONTENT="defaultPortal: taitra
-          portals:
-            - name: taitra
-              portalId: ${HUBSPOT_PORTAL_ID}
-              authType: personalaccesskey
-              personalAccessKey: ${HUBSPOT_PERSONAL_ACCESS_KEY}"
-
-          # 寫入專案根目錄（CLI v8+ 優先讀取此位置）
-          printf 'defaultPortal: taitra\nportals:\n  - name: taitra\n    portalId: %s\n    authType: personalaccesskey\n    personalAccessKey: %s\n' \
-            "${HUBSPOT_PORTAL_ID}" "${HUBSPOT_PERSONAL_ACCESS_KEY}" \
-            > hubspot.config.yml
-
-          # 同時寫入 ~/.hscli/（舊版 CLI 備用）
           mkdir -p "$HOME/.hscli"
-          cp hubspot.config.yml "$HOME/.hscli/config.yml"
+          printf 'defaultPortal: taitra\nportals:\n  - name: taitra\n    portalId: %s\n    authType: personalaccesskey\n    personalAccessKey: %s\n' \
+            "${HUBSPOT_PORTAL_ID}" \
+            "${HUBSPOT_PERSONAL_ACCESS_KEY}" \
+            > "$HOME/.hscli/config.yml"
 
-          echo "✅ hubspot.config.yml written to project root and ~/.hscli/"
-          echo "--- Config preview (key masked) ---"
-          sed 's/personalAccessKey:.*/personalAccessKey: ***MASKED***/' hubspot.config.yml
+          echo "✅ Config written to ~/.hscli/config.yml"
+          echo "--- Content preview (key masked) ---"
+          sed 's/personalAccessKey:.*/personalAccessKey: ***MASKED***/' "$HOME/.hscli/config.yml"
 
       # ── Step 6：上傳主題到 HubSpot CMS ──────────
       # 將本地 taiwan-select-theme 資料夾推送到
       # HubSpot Design Manager 的 AP-TEAM/Projects/staging 路徑
-      # 注意：CLI v8+ 使用 `hs upload`，舊版使用 `hs cms upload`
       - name: Upload theme to HubSpot Design Manager
         env:
           HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
           HUBSPOT_PORTAL_ID: ${{ secrets.HUBSPOT_PORTAL_ID }}
         run: |
           hs upload taiwan-select-theme AP-TEAM/Projects/staging \
-            --account taitra
+            --portal-id "${HUBSPOT_PORTAL_ID}"
