@@ -60,9 +60,11 @@ jobs:
       # ── Step 6：上傳主題到 HubSpot CMS ──────────
       # 將本地 taiwan-select-theme 資料夾推送到
       # HubSpot Design Manager 的 AP-TEAM/Projects/staging 路徑
+      # 注意：CLI v8+ 使用 `hs upload`，舊版使用 `hs cms upload`
       - name: Upload theme to HubSpot Design Manager
         env:
           HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
+          HUBSPOT_PORTAL_ID: ${{ secrets.HUBSPOT_PORTAL_ID }}
         run: |
-          hs cms upload taiwan-select-theme AP-TEAM/Projects/staging \
+          hs upload taiwan-select-theme AP-TEAM/Projects/staging \
             --account taitra
