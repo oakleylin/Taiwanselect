@@ -57,8 +57,6 @@ jobs:
           print('Config written to', cfg)
           "
 
-          cp "$HOME/.hscli/config.yml" hubspot.config.yml
-
           echo "=== config.yml (key masked) ==="
           sed 's/personalAccessKey:.*/personalAccessKey: ***MASKED***/' "$HOME/.hscli/config.yml"
 
