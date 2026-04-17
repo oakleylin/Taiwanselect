@@ -71,5 +71,5 @@ jobs:
           HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
           HUBSPOT_PORTAL_ID: ${{ secrets.HUBSPOT_PORTAL_ID }}
         run: |
-          hs cms upload taiwan-select-theme AP-TEAM/Projects/staging \
+          hs cms upload . AP-TEAM/Projects/staging \
             --account taitra
