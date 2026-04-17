@@ -39,23 +39,32 @@ jobs:
       #     npm run build
 
       # ── Step 5：寫入 HubSpot 驗證設定 ──────────
-      # 直接產生 ~/.hscli/config.yml，避免 hs init 需要互動式輸入
-      # 使用 printf 確保不會有多餘的縮排或空白
+      # CLI v8+ 優先讀取專案根目錄的 hubspot.config.yml
+      # 同時也寫入 ~/.hscli/config.yml 作為備用
       - name: Configure HubSpot CLI authentication
         env:
           HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
           HUBSPOT_PORTAL_ID: ${{ secrets.HUBSPOT_PORTAL_ID }}
         run: |
+          CONFIG_CONTENT="defaultPortal: taitra
+          portals:
+            - name: taitra
+              portalId: ${HUBSPOT_PORTAL_ID}
+              authType: personalaccesskey
+              personalAccessKey: ${HUBSPOT_PERSONAL_ACCESS_KEY}"
+
+          # 寫入專案根目錄（CLI v8+ 優先讀取此位置）
+          printf 'defaultPortal: taitra\nportals:\n  - name: taitra\n    portalId: %s\n    authType: personalaccesskey\n    personalAccessKey: %s\n' \
+            "${HUBSPOT_PORTAL_ID}" "${HUBSPOT_PERSONAL_ACCESS_KEY}" \
+            > hubspot.config.yml
+
+          # 同時寫入 ~/.hscli/（舊版 CLI 備用）
           mkdir -p "$HOME/.hscli"
-          printf '%s\n' \
-            "defaultPortal: taitra" \
-            "portals:" \
-            "  - name: taitra" \
-            "    portalId: ${HUBSPOT_PORTAL_ID}" \
-            "    authType: personalaccesskey" \
-            "    personalAccessKey: ${HUBSPOT_PERSONAL_ACCESS_KEY}" \
-            > "$HOME/.hscli/config.yml"
-          echo "✅ hubspot config written"
+          cp hubspot.config.yml "$HOME/.hscli/config.yml"
+
+          echo "✅ hubspot.config.yml written to project root and ~/.hscli/"
+          echo "--- Config preview (key masked) ---"
+          sed 's/personalAccessKey:.*/personalAccessKey: ***MASKED***/' hubspot.config.yml
 
       # ── Step 6：上傳主題到 HubSpot CMS ──────────
       # 將本地 taiwan-select-theme 資料夾推送到
