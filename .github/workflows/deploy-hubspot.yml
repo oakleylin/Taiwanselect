@@ -39,31 +39,23 @@ jobs:
       #     npm run build
 
       # ── Step 5：寫入 HubSpot 驗證設定 ──────────
-      # 以 Personal Access Key 產生 hubspot.config.yml
-      # 避免在 CI 環境中需要互動式登入
+      # 直接產生 ~/.hscli/config.yml，避免 hs init 需要互動式輸入
+      # 使用 printf 確保不會有多餘的縮排或空白
       - name: Configure HubSpot CLI authentication
         env:
           HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
+          HUBSPOT_PORTAL_ID: ${{ secrets.HUBSPOT_PORTAL_ID }}
         run: |
-          hs init --auth-type personalaccesskey \
-            --personal-access-key "$HUBSPOT_PERSONAL_ACCESS_KEY" \
-            --portal-id "${{ secrets.HUBSPOT_PORTAL_ID }}" \
-            --account-name taitra \
-            --default-account \
-            --skip-tutorial 2>/dev/null || true
-
-          # 備用方案：若 hs init 不支援 flag，直接產生設定檔
-          if [ ! -f "$HOME/.hscli/config.yml" ] && [ ! -f "hubspot.config.yml" ]; then
-            mkdir -p "$HOME/.hscli"
-            cat > "$HOME/.hscli/config.yml" <<EOF
-          defaultPortal: taitra
-          portals:
-            - name: taitra
-              portalId: ${{ secrets.HUBSPOT_PORTAL_ID }}
-              authType: personalaccesskey
-              personalAccessKey: ${HUBSPOT_PERSONAL_ACCESS_KEY}
-          EOF
-          fi
+          mkdir -p "$HOME/.hscli"
+          printf '%s\n' \
+            "defaultPortal: taitra" \
+            "portals:" \
+            "  - name: taitra" \
+            "    portalId: ${HUBSPOT_PORTAL_ID}" \
+            "    authType: personalaccesskey" \
+            "    personalAccessKey: ${HUBSPOT_PERSONAL_ACCESS_KEY}" \
+            > "$HOME/.hscli/config.yml"
+          echo "✅ hubspot config written"
 
       # ── Step 6：上傳主題到 HubSpot CMS ──────────
       # 將本地 taiwan-select-theme 資料夾推送到
