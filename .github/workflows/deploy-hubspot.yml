@@ -1,0 +1,76 @@
+name: Deploy to HubSpot
+
+# ──────────────────────────────────────────────
+# 觸發條件：
+#   - push 到 main 分支時自動執行
+#   - 也可在 GitHub Actions 頁面手動觸發
+# ──────────────────────────────────────────────
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Upload Theme to HubSpot CMS
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── Step 1：取出程式碼 ──────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Step 2：設定 Node.js 環境 ───────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # ── Step 3：安裝 HubSpot CLI ────────────────
+      - name: Install HubSpot CLI
+        run: npm install -g @hubspot/cli
+
+      # ── Step 4：（選用）安裝專案依賴並打包 ─────
+      # 若你的主題不需要 build 步驟，可將此區塊刪除
+      # - name: Install dependencies & build
+      #   run: |
+      #     npm install
+      #     npm run build
+
+      # ── Step 5：寫入 HubSpot 驗證設定 ──────────
+      # 以 Personal Access Key 產生 hubspot.config.yml
+      # 避免在 CI 環境中需要互動式登入
+      - name: Configure HubSpot CLI authentication
+        env:
+          HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
+        run: |
+          hs init --auth-type personalaccesskey \
+            --personal-access-key "$HUBSPOT_PERSONAL_ACCESS_KEY" \
+            --portal-id "${{ secrets.HUBSPOT_PORTAL_ID }}" \
+            --account-name taitra \
+            --default-account \
+            --skip-tutorial 2>/dev/null || true
+
+          # 備用方案：若 hs init 不支援 flag，直接產生設定檔
+          if [ ! -f "$HOME/.hscli/config.yml" ] && [ ! -f "hubspot.config.yml" ]; then
+            mkdir -p "$HOME/.hscli"
+            cat > "$HOME/.hscli/config.yml" <<EOF
+          defaultPortal: taitra
+          portals:
+            - name: taitra
+              portalId: ${{ secrets.HUBSPOT_PORTAL_ID }}
+              authType: personalaccesskey
+              personalAccessKey: ${HUBSPOT_PERSONAL_ACCESS_KEY}
+          EOF
+          fi
+
+      # ── Step 6：上傳主題到 HubSpot CMS ──────────
+      # 將本地 taiwan-select-theme 資料夾推送到
+      # HubSpot Design Manager 的 AP-TEAM/Projects/staging 路徑
+      - name: Upload theme to HubSpot Design Manager
+        env:
+          HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
+        run: |
+          hs cms upload taiwan-select-theme AP-TEAM/Projects/staging \
+            --account taitra
