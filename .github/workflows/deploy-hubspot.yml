@@ -23,10 +23,10 @@ jobs:
       - name: Install HubSpot CLI
         run: npm install -g @hubspot/cli@8.2.0
 
-      # ── 寫入設定檔（使用 CLI v8 正確格式） ──────────
-      # 本機 config 使用 defaultAccount / accounts / accountId
-      # 且必須有 auth.tokenInfo 區塊，否則 CLI 會 crash
-      # expiresAt 設為過去時間，讓 CLI 使用 personalAccessKey 重新取得 token
+      # ── 寫入設定檔（CLI v8 正確格式，用 Python 避開 heredoc 縮排問題） ──
+      # CLI v8 使用: defaultAccount / accounts / accountId
+      # 必須有 auth.tokenInfo，否則 upload 指令會 crash
+      # expiresAt 設為過去時間，讓 CLI 用 personalAccessKey 自動刷新 token
       - name: Configure HubSpot CLI authentication
         env:
           HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
@@ -34,22 +34,29 @@ jobs:
         run: |
           mkdir -p "$HOME/.hscli"
 
-          cat > "$HOME/.hscli/config.yml" << HSEOF
-          defaultAccount: taitra
-          accounts:
-            - name: taitra
-              accountId: ${HUBSPOT_PORTAL_ID}
-              env: prod
-              authType: personalaccesskey
-              accountType: STANDARD
-              personalAccessKey: ${HUBSPOT_PERSONAL_ACCESS_KEY}
-              auth:
-                tokenInfo:
-                  accessToken: ''
-                  expiresAt: '2000-01-01T00:00:00.000Z'
-          HSEOF
+          python3 -c "
+          import os, pathlib
+          pak = os.environ['HUBSPOT_PERSONAL_ACCESS_KEY']
+          pid = os.environ['HUBSPOT_PORTAL_ID']
+          lines = [
+              'defaultAccount: taitra',
+              'accounts:',
+              '  - name: taitra',
+              '    accountId: ' + pid,
+              '    env: prod',
+              '    authType: personalaccesskey',
+              '    accountType: STANDARD',
+              '    personalAccessKey: ' + pak,
+              '    auth:',
+              '      tokenInfo:',
+              '        accessToken: \"\"',
+              '        expiresAt: \"2000-01-01T00:00:00.000Z\"',
+          ]
+          cfg = pathlib.Path.home() / '.hscli' / 'config.yml'
+          cfg.write_text('\n'.join(lines) + '\n')
+          print('Config written to', cfg)
+          "
 
-          # 同時複製到專案根目錄
           cp "$HOME/.hscli/config.yml" hubspot.config.yml
 
           echo "=== config.yml (key masked) ==="
