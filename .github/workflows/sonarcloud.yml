@@ -105,14 +105,39 @@ jobs:
           node-version: 20
 
       - name: Install HubSpot CLI
-        run: npm install -g @hubspot/cli@4
+        run: npm install -g @hubspot/cli@latest
 
-      - name: Upload theme to HubSpot Sandbox
+      - name: Configure HubSpot CLI
         env:
           HUBSPOT_PORTAL_ID: ${{ secrets.HUBSPOT_PORTAL_ID }}
           HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
         run: |
-          hs upload . ${{ env.HUBSPOT_THEME_NAME }} --use-env
+          mkdir -p "$HOME/.hscli"
+          python3 -c "
+          import os, pathlib
+          pak = os.environ['HUBSPOT_PERSONAL_ACCESS_KEY']
+          pid = os.environ['HUBSPOT_PORTAL_ID']
+          lines = [
+              'defaultAccount: default',
+              'accounts:',
+              '  - name: default',
+              '    accountId: ' + pid,
+              '    env: prod',
+              '    authType: personalaccesskey',
+              '    accountType: STANDARD',
+              '    personalAccessKey: ' + pak,
+              '    auth:',
+              '      tokenInfo:',
+              '        accessToken: \"\"',
+              '        expiresAt: \"2000-01-01T00:00:00.000Z\"',
+          ]
+          cfg = pathlib.Path.home() / '.hscli' / 'config.yml'
+          cfg.write_text('\n'.join(lines) + '\n')
+          print('HubSpot CLI configured.')
+          "
+
+      - name: Upload theme to HubSpot Sandbox
+        run: hs cms upload . ${{ env.HUBSPOT_THEME_NAME }} --account default
 
   # ════════════════════════════════════════════
   # Job 4：部署到 HubSpot Production（Sandbox 通過後）
@@ -134,11 +159,36 @@ jobs:
           node-version: 20
 
       - name: Install HubSpot CLI
-        run: npm install -g @hubspot/cli@4
+        run: npm install -g @hubspot/cli@latest
 
-      - name: Upload theme to HubSpot Production
+      - name: Configure HubSpot CLI
         env:
           HUBSPOT_PORTAL_ID: ${{ secrets.HUBSPOT_PORTAL_ID }}
           HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
         run: |
-          hs upload . ${{ env.HUBSPOT_THEME_NAME }} --use-env
+          mkdir -p "$HOME/.hscli"
+          python3 -c "
+          import os, pathlib
+          pak = os.environ['HUBSPOT_PERSONAL_ACCESS_KEY']
+          pid = os.environ['HUBSPOT_PORTAL_ID']
+          lines = [
+              'defaultAccount: default',
+              'accounts:',
+              '  - name: default',
+              '    accountId: ' + pid,
+              '    env: prod',
+              '    authType: personalaccesskey',
+              '    accountType: STANDARD',
+              '    personalAccessKey: ' + pak,
+              '    auth:',
+              '      tokenInfo:',
+              '        accessToken: \"\"',
+              '        expiresAt: \"2000-01-01T00:00:00.000Z\"',
+          ]
+          cfg = pathlib.Path.home() / '.hscli' / 'config.yml'
+          cfg.write_text('\n'.join(lines) + '\n')
+          print('HubSpot CLI configured.')
+          "
+
+      - name: Upload theme to HubSpot Production
+        run: hs cms upload . ${{ env.HUBSPOT_THEME_NAME }} --account default
