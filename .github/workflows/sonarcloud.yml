@@ -1,27 +1,188 @@
-name: Build
+name: CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
 
+env:
+  HUBSPOT_THEME_NAME: AP-TEAM/Projects/taiwan-select-theme
 
 jobs:
-  build:
-    name: Build and analyze
+  # ════════════════════════════════════════════
+  # Job 1：SAST 安全掃描（Gitleaks + CodeQL）
+  # ════════════════════════════════════════════
+  sast:
+    name: SAST Security Scan
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: read
+      security-events: write
+
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602 # v6.0.0
+          fetch-depth: 0
+
+      - name: Gitleaks - Scan for secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: CodeQL - Initialize
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+          queries: security-and-quality
+
+      - name: CodeQL - Perform analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript"
+
+  # ════════════════════════════════════════════
+  # Job 2：SonarCloud 品質掃描（SAST 通過後）
+  # ════════════════════════════════════════════
+  sonarcloud:
+    name: SonarCloud Analysis
+    runs-on: ubuntu-latest
+    needs: sast
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+
+      - name: Wait for SonarCloud analysis to complete
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      # If you wish to fail your job when the Quality Gate is red, uncomment the
-      # following lines. This would typically be used to fail a deployment.
-      # - uses: SonarSource/sonarqube-quality-gate-action@cf038b0e0cdecfa9e56c198bbb7d21d751d62c3b # v1.2.0
-      #   timeout-minutes: 5
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          set -e
+          PROJECT_KEY=$(grep 'sonar.projectKey' sonar-project.properties | cut -d'=' -f2 | tr -d ' ')
+          echo "Waiting for analysis of project: $PROJECT_KEY"
+
+          attempts=30
+          sleep_time=10
+
+          while [ "$attempts" -gt 0 ]; do
+            CE_RESPONSE=$(curl -s -u "$SONAR_TOKEN:" \
+              "https://sonarcloud.io/api/ce/component?component=${PROJECT_KEY}")
+            CE_STATUS=$(echo "$CE_RESPONSE" | jq -r '.current.status // "NONE"')
+            echo "Background task status: $CE_STATUS"
+
+            if [ "$CE_STATUS" = "SUCCESS" ]; then
+              echo "Analysis complete."
+              break
+            elif [ "$CE_STATUS" = "FAILED" ] || [ "$CE_STATUS" = "CANCELLED" ]; then
+              echo "SonarCloud analysis task failed."
+              exit 1
+            fi
+
+            attempts=$((attempts - 1))
+            echo "Waiting... ($attempts attempts left)"
+            sleep "$sleep_time"
+          done
+
+          if [ "$attempts" -eq 0 ]; then
+            echo "Timed out waiting for SonarCloud analysis."
+            exit 1
+          fi
+
+      - name: Check SonarCloud Quality Gate
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          set -e
+          PROJECT_KEY=$(grep 'sonar.projectKey' sonar-project.properties | cut -d'=' -f2 | tr -d ' ')
+          echo "Checking quality for project: $PROJECT_KEY"
+
+          RESPONSE=$(curl -s -u "$SONAR_TOKEN:" \
+            "https://sonarcloud.io/api/measures/component?component=${PROJECT_KEY}&metricKeys=bugs,vulnerabilities,security_hotspots_reviewed")
+
+          BUGS=$(echo "$RESPONSE" | jq -r '.component.measures[] | select(.metric=="bugs") | .value')
+          VULNS=$(echo "$RESPONSE" | jq -r '.component.measures[] | select(.metric=="vulnerabilities") | .value')
+          HOTSPOTS_REVIEWED=$(echo "$RESPONSE" | jq -r '.component.measures[] | select(.metric=="security_hotspots_reviewed") | .value // "100"')
+
+          echo "Bugs: $BUGS"
+          echo "Vulnerabilities: $VULNS"
+          echo "Security Hotspots Reviewed: ${HOTSPOTS_REVIEWED}%"
+
+          FAILED=0
+          [ "$BUGS" != "0" ] && echo "Bugs must be 0 (found: $BUGS)" && FAILED=1
+          [ "$VULNS" != "0" ] && echo "Vulnerabilities must be 0 (found: $VULNS)" && FAILED=1
+          HOTSPOTS_INT=$(echo "$HOTSPOTS_REVIEWED" | cut -d'.' -f1)
+          [ "$HOTSPOTS_INT" != "100" ] && echo "All Security Hotspots must be reviewed (reviewed: ${HOTSPOTS_REVIEWED}%)" && FAILED=1
+
+          if [ "$FAILED" = "1" ]; then
+            echo "Quality check failed. Fix issues before deploying."
+            exit 1
+          fi
+
+          echo "Quality check passed."
+
+  # ════════════════════════════════════════════
+  # Job 3：部署到 HubSpot Sandbox（僅 push to main）
+  # 需在 GitHub Settings > Environments > sandbox 設定對應的 secrets
+  # ════════════════════════════════════════════
+  deploy-sandbox:
+    name: Deploy to HubSpot Sandbox
+    runs-on: ubuntu-latest
+    needs: sonarcloud
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment: sandbox
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install HubSpot CLI
+        run: npm install -g @hubspot/cli@4
+
+      - name: Upload theme to HubSpot Sandbox
+        env:
+          HUBSPOT_PORTAL_ID: ${{ secrets.HUBSPOT_PORTAL_ID }}
+          HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
+        run: |
+          hs upload . ${{ env.HUBSPOT_THEME_NAME }} --use-env
+
+  # ════════════════════════════════════════════
+  # Job 4：部署到 HubSpot Production（Sandbox 通過後）
+  # 需在 GitHub Settings > Environments > production 設定對應的 secrets
+  # ════════════════════════════════════════════
+  deploy-production:
+    name: Deploy to HubSpot Production
+    runs-on: ubuntu-latest
+    needs: deploy-sandbox
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install HubSpot CLI
+        run: npm install -g @hubspot/cli@4
+
+      - name: Upload theme to HubSpot Production
+        env:
+          HUBSPOT_PORTAL_ID: ${{ secrets.HUBSPOT_PORTAL_ID }}
+          HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
+        run: |
+          hs upload . ${{ env.HUBSPOT_THEME_NAME }} --use-env
