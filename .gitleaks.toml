@@ -1,0 +1,6 @@
+[allowlist]
+description = "Allow GitHub Actions commit hash pins (not secrets)"
+regexTarget = "line"
+regexes = [
+  '''uses:\s+[a-zA-Z0-9/_.-]+@[0-9a-f]{40}'''
+]
