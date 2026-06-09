@@ -1,0 +1,6 @@
+.github
+sonar-project.properties
+hubspot.config.yml
+.git
+.gitignore
+*.md
