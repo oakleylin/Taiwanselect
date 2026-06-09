@@ -4,3 +4,12 @@ hubspot.config.yml
 .git
 .gitignore
 *.md
+.gitleaks.toml
+
+# HubDB table IDs are portal-specific — these modules reference tables
+# that only exist in the source portal. Upload manually after creating
+# the corresponding HubDB tables in the target portal.
+modules/company_card.module/module.html
+modules/popular.module/module.html
+modules/eventcompany.module/module.html
+modules/eventlist_table.module/module.html

@@ -137,7 +137,7 @@ jobs:
           "
 
       - name: Upload theme to HubSpot Sandbox
-        run: hs cms upload . ${{ env.HUBSPOT_THEME_NAME }} --account default || true
+        run: hs cms upload . ${{ env.HUBSPOT_THEME_NAME }} --account default
 
   # ════════════════════════════════════════════
   # Job 4：部署到 HubSpot Production（Sandbox 通過後）
@@ -191,4 +191,4 @@ jobs:
           "
 
       - name: Upload theme to HubSpot Production
-        run: hs cms upload . ${{ env.HUBSPOT_THEME_NAME }} --account default || true
+        run: hs cms upload . ${{ env.HUBSPOT_THEME_NAME }} --account default
