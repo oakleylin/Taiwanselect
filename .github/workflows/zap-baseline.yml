@@ -1,0 +1,63 @@
+# ============================================================
+# DAST Scan (OWASP ZAP Baseline)
+# ------------------------------------------------------------
+# 用途：對 ap-staging 跑 OWASP ZAP Baseline 被動掃描
+# 觸發：手動 (workflow_dispatch) — 進 Actions 分頁點 Run workflow
+# 對應檢核項：050402（弱點掃描）、070101（漏洞修復狀態）
+# 設計者：Yamei + Claude  |  版本：v1.0  |  日期：2026/05/29
+# ------------------------------------------------------------
+# 安裝位置（請放到 Taiwan Select Repo）：
+#   .github/workflows/zap-baseline.yml
+# ============================================================
+
+name: DAST Scan (OWASP ZAP Baseline)
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: '要掃描的網址（含 https://）'
+        required: true
+        type: string
+        default: 'https://ap-staging.taitra.org.tw'
+
+permissions:
+  contents: read
+  issues: write           # 允許 ZAP 自動建立 issue（如有發現高風險）
+
+jobs:
+  zap_baseline:
+    name: OWASP ZAP Baseline Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: ${{ github.event.inputs.target_url }}
+
+          # cmd_options 說明：
+          #   -a  包含所有 alpha & beta 規則（passive scan rules）
+          #   -j  使用 ajax spider（HubSpot 有大量 JS 動態載入，建議開）
+          cmd_options: '-a -j'
+
+          # fail_action: false
+          # 找到高風險也不讓 workflow 失敗。
+          # 原因：HubSpot SaaS 平台層級的問題不是我方能修的，
+          # 不要讓 workflow 因為 HubSpot 自己的 header 警告而紅勾。
+          # 看到結果後人工判斷該不該處理。
+          fail_action: false
+
+          # 是否自動建立 GitHub Issue
+          # false = 不建立（避免每次掃完 issue 數量爆炸）
+          allow_issue_writing: false
+
+          # 報告檔名
+          artifact_name: 'zap_scan'
+
+      - name: Show artifact location
+        if: always()
+        run: |
+          echo "::notice::ZAP 掃描完成。請到本次 run 頁面最下方 Artifacts 下載 'zap_scan'，解壓後開 report_html.html 看報告。"
