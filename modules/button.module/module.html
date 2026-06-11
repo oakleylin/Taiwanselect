@@ -13,13 +13,14 @@
     {% endunless %}
   {% endif %}
 
-  {% set rel = (module.button_link.open_in_new_tab ? 'noopener ' : null) ~ (module.button_link.no_follow ? 'nofollow' : null) %}
+  {% set rel = (module.button_link.open_in_new_tab ? 'noopener noreferrer' : '') %}
+  {% if module.button_link.no_follow %}
+    {% set rel = rel ~ (rel ? ' nofollow' : 'nofollow') %}
+  {% endif %}
 
-  <{% if module.button_options.button_link_toggle == true %}a href="{{ href }}" {% else %}button {% endif %} 
+  <{% if module.button_options.button_link_toggle == true %}a href="{{ href }}"{% if module.button_link.open_in_new_tab %} target="_blank" rel="{{ rel }}"{% elif rel %} rel="{{ rel }}"{% endif %}{% else %}button {% endif %}
     class="button {% if module.style.button_type == 'secondary' %} button--secondary{% elif module.style.button_type == 'simple' %} button--simple{% endif %} {% if module.style.button_size == 'small' %} button--small{% elif module.style.button_size == 'large' %} button--large{% endif %} {% if module.button_icon.icon_position == 'right' %} button--icon-right{% endif %}"
-    id="button_{{ name }}"
-    {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
-    rel="{{ rel }}">
+    id="button_{{ name }}">
 
     {# Icon 邏輯 #}
     {% if module.button_options.button_icon_toggle == true and module.button_icon.icon_field.unicode %}
