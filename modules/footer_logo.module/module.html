@@ -13,7 +13,7 @@
     class="logo-text {{ module.extra_class }}"
     href="{{ href }}"
     {% if open_new %}target="_blank" rel="noopener"{% endif %}
-    aria-label="{{ module.text_field|default('') }}"
+    {% if not module.text_field %}aria-label="{{ module.logo_field.alt|default('') }}"{% endif %}
   >
     {% if module.logo_field.src %}
       <img
