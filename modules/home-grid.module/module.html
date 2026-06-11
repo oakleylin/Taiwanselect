@@ -18,7 +18,8 @@
              href="{{ href|escape_url }}"
            {% endif %}
            class="category-link"
-           {% if item.link_field.open_in_new_tab %}target="_blank" rel="noopener noreferrer{% if item.link_field.rel %} {{ item.link_field.rel|escape_attr }}{% endif %}"{% elif item.link_field.rel %}rel="{{ item.link_field.rel|escape_attr }}"{% endif %}>
+           {% if item.link_field.open_in_new_tab %}target="_blank"{% endif %}
+           {% if item.link_field.rel %}rel="{{ item.link_field.rel|escape_attr }}"{% endif %}>
           
           <div class="category-image-wrapper">
             <div class="category-circle">

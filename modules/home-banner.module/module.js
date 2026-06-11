@@ -1,6 +1,6 @@
 // 確保在 jQuery 載入後執行
 $(document).ready(function() {
-  const $slider = $('#homepageSlider');
+  var $slider = $('#homepageSlider');
   
   $slider.slick({
     infinite: true,

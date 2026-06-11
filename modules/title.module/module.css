@@ -13,8 +13,9 @@
 .banner-inner-container {
   max-width: 1200px; /* 可依據你的網站佈局修改寬度 */
   margin: 0 auto; 
-  padding: 0 20px 10px; /* 確保手機版時左右有留白，不會貼死邊緣 */
+  padding: 0 20px; /* 確保手機版時左右有留白，不會貼死邊緣 */
   border-bottom: 2px solid #e1e1e1; /* 標題下方的那條灰線 */
+  padding-bottom: 10px; /* 標題與底線的距離 */
 }
 
 /* ==========================================================================

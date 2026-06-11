@@ -12,14 +12,14 @@
   <a
     class="logo-text {{ module.extra_class }}"
     href="{{ href }}"
-    {% if open_new %}target="_blank" rel="noopener noreferrer"{% endif %}
+    {% if open_new %}target="_blank" rel="noopener"{% endif %}
+    aria-label="{{ module.text_field|default('') }}"
   >
     {% if module.logo_field.src %}
       <img
         class="logo-text__logo"
         src="{{ module.logo_field.src }}"
-        alt="{% if module.text_field %}{% else %}{{ module.logo_field.alt|default('Logo') }}{% endif %}"
-        {% if module.text_field %}role="presentation" aria-hidden="true"{% endif %}
+        alt="{{ module.logo_field.alt|default('') }}"
         loading="lazy"
         style="height: {{ logo_h }}px;"
       >
@@ -35,7 +35,7 @@
       <img
         class="logo-text__logo"
      src="{{ module.logo_field.src }}"
-     alt="{{ module.logo_field.alt|default('Logo') }}"
+     alt="{{ module.logo_field.alt|default('') }}"
      loading="lazy"
      style="height: {{ module.logo_height|default(28) }}px;"
       >
