@@ -1,9 +1,9 @@
 (function() {
   // Variables
-  var nav = document.querySelector('.header__navigation');
-  var navToggle = document.querySelector('.header__navigation--toggle');
-  var closeToggle = document.querySelector('.header__close--toggle');
-  var emailGlobalUnsub = document.querySelector('input[name="globalunsub"]');
+  const nav = document.querySelector('.header__navigation');
+  const navToggle = document.querySelector('.header__navigation--toggle');
+  const closeToggle = document.querySelector('.header__close--toggle');
+  const emailGlobalUnsub = document.querySelector('input[name="globalunsub"]');
 
   // Functions
   function domReady(callback) {
@@ -27,10 +27,10 @@
   }
 
   function toggleDisabled() {
-    var emailSubItem = document.querySelectorAll('#email-prefs-form .item');
+    const emailSubItem = document.querySelectorAll('#email-prefs-form .item');
 
     emailSubItem.forEach(item => {
-      var emailSubItemInput = item.querySelector('input');
+      const emailSubItemInput = item.querySelector('input');
 
       if (emailGlobalUnsub.checked) {
         item.classList.add('disabled');
