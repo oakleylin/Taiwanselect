@@ -8,15 +8,16 @@
       {% set href = "mailto:" ~ href %}
     {% endif %}
 
-    <a href="{{ href }}" 
-       class="custom-sliding-btn"
-       {% if module.link_field.open_in_new_tab %}target="_blank" rel="noopener noreferrer{% if module.link_field.no_follow %} nofollow{% endif %}"{% elif module.link_field.no_follow %}rel="nofollow"{% endif %}>
-      
-      {# ✅ 修正：使用 HubL 專用的 default 過濾器 #}
+    {% if module.link_field.open_in_new_tab %}
+    <a href="{{ href }}" class="custom-sliding-btn" target="_blank" rel="noopener noreferrer{% if module.link_field.no_follow %} nofollow{% endif %}">
+    {% elif module.link_field.no_follow %}
+    <a href="{{ href }}" class="custom-sliding-btn" rel="nofollow">
+    {% else %}
+    <a href="{{ href }}" class="custom-sliding-btn">
+    {% endif %}
       <span class="btn-text">
         {{ module.link_field.link_text|default("MORE") }}
       </span>
-      
     </a>
   {% else %}
     {# 預覽模式：若後台沒填網址，在編輯器顯示一個假的按鈕方便編輯 #}

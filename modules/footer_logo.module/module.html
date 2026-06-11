@@ -10,11 +10,11 @@
 
 {% if href %}
   {% if module.text_field %}
-    <a
-      class="logo-text {{ module.extra_class }}"
-      href="{{ href }}"
-      {% if open_new %}target="_blank" rel="noopener noreferrer"{% endif %}
-    >
+    {% if open_new %}
+    <a class="logo-text {{ module.extra_class }}" href="{{ href }}" target="_blank" rel="noopener noreferrer">
+    {% else %}
+    <a class="logo-text {{ module.extra_class }}" href="{{ href }}">
+    {% endif %}
       {% if module.logo_field.src %}
         <img
           class="logo-text__logo"
@@ -29,11 +29,11 @@
       <span class="logo-text__text">{{ module.text_field }}</span>
     </a>
   {% else %}
-    <a
-      class="logo-text {{ module.extra_class }}"
-      href="{{ href }}"
-      {% if open_new %}target="_blank" rel="noopener noreferrer"{% endif %}
-    >
+    {% if open_new %}
+    <a class="logo-text {{ module.extra_class }}" href="{{ href }}" target="_blank" rel="noopener noreferrer">
+    {% else %}
+    <a class="logo-text {{ module.extra_class }}" href="{{ href }}">
+    {% endif %}
       {% if module.logo_field.src %}
         <img
           class="logo-text__logo"

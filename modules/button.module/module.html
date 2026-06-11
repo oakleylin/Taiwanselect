@@ -13,9 +13,19 @@
     {% endunless %}
   {% endif %}
 
-  <{% if module.button_options.button_link_toggle == true %}a href="{{ href }}"{% if module.button_link.open_in_new_tab %} target="_blank" rel="noopener noreferrer{% if module.button_link.no_follow %} nofollow{% endif %}"{% elif module.button_link.no_follow %} rel="nofollow"{% endif %}{% else %}button type="button"{% endif %}
-    class="button {% if module.style.button_type == 'secondary' %} button--secondary{% elif module.style.button_type == 'simple' %} button--simple{% endif %} {% if module.style.button_size == 'small' %} button--small{% elif module.style.button_size == 'large' %} button--large{% endif %} {% if module.button_icon.icon_position == 'right' %} button--icon-right{% endif %}"
-    id="button_{{ name }}">
+  {% set button_classes = "button" ~ (module.style.button_type == 'secondary' ? ' button--secondary' : '') ~ (module.style.button_type == 'simple' ? ' button--simple' : '') ~ (module.style.button_size == 'small' ? ' button--small' : '') ~ (module.style.button_size == 'large' ? ' button--large' : '') ~ (module.button_icon.icon_position == 'right' ? ' button--icon-right' : '') %}
+
+  {% if module.button_options.button_link_toggle == true %}
+    {% if module.button_link.open_in_new_tab %}
+    <a href="{{ href }}" target="_blank" rel="noopener noreferrer{% if module.button_link.no_follow %} nofollow{% endif %}" class="{{ button_classes }}" id="button_{{ name }}">
+    {% elif module.button_link.no_follow %}
+    <a href="{{ href }}" rel="nofollow" class="{{ button_classes }}" id="button_{{ name }}">
+    {% else %}
+    <a href="{{ href }}" class="{{ button_classes }}" id="button_{{ name }}">
+    {% endif %}
+  {% else %}
+    <button type="button" class="{{ button_classes }}" id="button_{{ name }}">
+  {% endif %}
 
     {# Icon 邏輯 #}
     {% if module.button_options.button_icon_toggle == true and module.button_icon.icon_field.unicode %}
@@ -30,6 +40,10 @@
 
     <span class="button__text">{{ module.button_text }}</span>
 
-  </{% if module.button_options.button_link_toggle == true %}a{% else %}button{% endif %}>
+  {% if module.button_options.button_link_toggle == true %}
+  </a>
+  {% else %}
+  </button>
+  {% endif %}
 
 </div>

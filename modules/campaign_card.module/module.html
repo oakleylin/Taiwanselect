@@ -14,11 +14,22 @@
 
     {# 動態判斷：如果有連結就用 <a> 包住整張卡片 #}
     {% if href %}
-      <a href="{{ href }}" 
+      {% if item.link_field.open_in_new_tab %}
+      <a href="{{ href }}"
          class="hs-card"
          style="display: block; text-decoration: none; {% if item.image_field.src %}--bg: url('{{ item.image_field.src }}');{% endif %}"
-         {% if item.link_field.open_in_new_tab %}target="_blank" rel="noopener noreferrer{% if item.link_field.rel %} {{ item.link_field.rel|escape_attr }}{% endif %}"{% elif item.link_field.rel %}rel="{{ item.link_field.rel|escape_attr }}"{% endif %}
-      >
+         target="_blank"
+         rel="noopener noreferrer{% if item.link_field.rel %} {{ item.link_field.rel|escape_attr }}{% endif %}">
+      {% elif item.link_field.rel %}
+      <a href="{{ href }}"
+         class="hs-card"
+         style="display: block; text-decoration: none; {% if item.image_field.src %}--bg: url('{{ item.image_field.src }}');{% endif %}"
+         rel="{{ item.link_field.rel|escape_attr }}">
+      {% else %}
+      <a href="{{ href }}"
+         class="hs-card"
+         style="display: block; text-decoration: none; {% if item.image_field.src %}--bg: url('{{ item.image_field.src }}');{% endif %}">
+      {% endif %}
     {% else %}
       <div class="hs-card"
          style="{% if item.image_field.src %}--bg: url('{{ item.image_field.src }}');{% endif %}"

@@ -12,13 +12,19 @@
       {% endif %}
 
       <div class="category-item">
-        <a {% if item.link_field.url.type is equalto "CALL_TO_ACTION" %}
-             href="{{ href }}" 
-           {% else %}
-             href="{{ href|escape_url }}"
-           {% endif %}
+        {% if item.link_field.open_in_new_tab %}
+        <a {% if item.link_field.url.type is equalto "CALL_TO_ACTION" %}href="{{ href }}"{% else %}href="{{ href|escape_url }}"{% endif %}
            class="category-link"
-           {% if item.link_field.open_in_new_tab %}target="_blank" rel="noopener noreferrer{% if item.link_field.rel %} {{ item.link_field.rel|escape_attr }}{% endif %}"{% elif item.link_field.rel %}rel="{{ item.link_field.rel|escape_attr }}"{% endif %}>
+           target="_blank"
+           rel="noopener noreferrer{% if item.link_field.rel %} {{ item.link_field.rel|escape_attr }}{% endif %}">
+        {% elif item.link_field.rel %}
+        <a {% if item.link_field.url.type is equalto "CALL_TO_ACTION" %}href="{{ href }}"{% else %}href="{{ href|escape_url }}"{% endif %}
+           class="category-link"
+           rel="{{ item.link_field.rel|escape_attr }}">
+        {% else %}
+        <a {% if item.link_field.url.type is equalto "CALL_TO_ACTION" %}href="{{ href }}"{% else %}href="{{ href|escape_url }}"{% endif %}
+           class="category-link">
+        {% endif %}
           
           <div class="category-image-wrapper">
             <div class="category-circle">

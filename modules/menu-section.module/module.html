@@ -39,24 +39,17 @@
  }}
 {% endmacro %}
 
-{# Menu item link attribute if the menu item is set to open in a new window #}
-
-{% macro linkTarget() %}
-{{
-  {
-    'target': '_blank',
-    'rel': 'noopener noreferrer'
-  }|xmlattr
-}}
-{% endmacro %}
-
 {# Navigation menu item macro #}
 
 {% macro link(node) %}
 
 <li {{ childItemClasses() if node.children else defaultItemClasses() }}>
   {% if node.url %}
-  <a href="{{ node.url }}" class="menu-link" {{ activeBranch() if node.activeBranch }} {{ activeNode() if node.activeNode }} {{ linkTarget() if node.linkTarget }}>{{ node.label }}</a>
+    {% if node.linkTarget %}
+    <a href="{{ node.url }}" class="menu-link" target="_blank" rel="noopener noreferrer" {{ activeBranch() if node.activeBranch }} {{ activeNode() if node.activeNode }}>{{ node.label }}</a>
+    {% else %}
+    <a href="{{ node.url }}" class="menu-link" {{ activeBranch() if node.activeBranch }} {{ activeNode() if node.activeNode }}>{{ node.label }}</a>
+    {% endif %}
   {% else %}
   <span class="menu-link">{{ node.label }}</span>
   {% endif %}
