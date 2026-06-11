@@ -626,10 +626,6 @@ select {
   color: {{ form_input_placeholder_color }};
 }
 
-:-moz-placeholder {
-  color: {{ form_input_placeholder_color }};
-}
-
 ::placeholder {
   color: {{ form_input_placeholder_color }};
 }
