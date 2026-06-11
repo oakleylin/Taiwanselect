@@ -36,12 +36,12 @@
 
 <script>
 window.addEventListener('load', function () {
-  var header  = document.querySelector('.header');
-  var nav     = document.querySelector('.header__navigation');
-  var toggle  = document.querySelector('.header__menu-toggle');
+  const header = document.querySelector('.header');
+  const nav = document.querySelector('.header__navigation');
+  const toggle = document.querySelector('.header__menu-toggle');
   if (!header || !nav || !toggle) return;
 
-  var isOpen = false;
+  let isOpen = false;
 
   toggle.addEventListener('click', function () {
     isOpen = !isOpen;

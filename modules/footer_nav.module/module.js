@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-  var backToTopBtn = document.getElementById("backToTopBtn");
+  const backToTopBtn = document.getElementById("backToTopBtn");
   
   if (backToTopBtn) {
     backToTopBtn.addEventListener("click", function(e) {
