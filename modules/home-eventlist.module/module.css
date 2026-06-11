@@ -57,7 +57,6 @@
   /* 移除所有預設連結樣式 */
   text-decoration: none !important;
   border: none !important;
-  outline: none;
   
   font-size: 24px; /* 微調大小 */
   font-weight: 500;

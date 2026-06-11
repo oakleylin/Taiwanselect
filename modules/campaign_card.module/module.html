@@ -17,8 +17,7 @@
       <a href="{{ href }}" 
          class="hs-card"
          style="display: block; text-decoration: none; {% if item.image_field.src %}--bg: url('{{ item.image_field.src }}');{% endif %}"
-         {% if item.link_field.open_in_new_tab %}target="_blank"{% endif %}
-         {% if item.link_field.rel %}rel="{{ item.link_field.rel|escape_attr }}"{% endif %}
+         {% if item.link_field.open_in_new_tab %}target="_blank" rel="noopener noreferrer{% if item.link_field.rel %} {{ item.link_field.rel|escape_attr }}{% endif %}"{% elif item.link_field.rel %}rel="{{ item.link_field.rel|escape_attr }}"{% endif %}
       >
     {% else %}
       <div class="hs-card"

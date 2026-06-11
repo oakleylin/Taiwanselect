@@ -59,8 +59,8 @@
 
   {% if node.children %}
   <input type="checkbox" id="{{ node.label }}" class="submenu-toggle">
-  <label class="menu-arrow" for="{{ node.label }}">
-    <span class="menu-arrow-bg"></span>
+  <label class="menu-arrow" for="{{ node.label }}" aria-label="展開 {{ node.label }} 子選單">
+    <span class="menu-arrow-bg" aria-hidden="true"></span>
   </label>
   {{ renderNavigation(node) }}
   {% endif %}

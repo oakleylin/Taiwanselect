@@ -33,10 +33,9 @@ color: #d7d7d7 !important;
 }
 
 .footer-link:hover {
-color: #f37a5b !important; /* 確保顏色優先級 */
+  color: #f37a5b !important; /* 確保顏色優先級 */
   text-decoration: none !important; /* 強制去掉底線 */
   border-bottom: none !important;  /* 確保沒有邊框底線 */
-  outline: none !important;        /* 去掉點擊時的外框 */
 }
 
 /* 橘色回到最上方按鈕 */
@@ -46,11 +45,14 @@ color: #f37a5b !important; /* 確保顏色優先級 */
   width: 50px;
   height: 50px;
   background-color: #f37a5b; /* 圖片中的橘色 */
+  border: none;
   border-radius: 50%; /* 變成圓形 */
   display: flex;
   justify-content: center;
   align-items: center;
   color: #ffffff;
+  cursor: pointer;
+  padding: 0;
   text-decoration: none;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
