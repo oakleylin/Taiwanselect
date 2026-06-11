@@ -19,7 +19,7 @@
       <img
         class="logo-text__logo"
         src="{{ module.logo_field.src }}"
-        alt="{{ module.logo_field.alt|default('') }}"
+        alt="{% if module.text_field %}{% else %}{{ module.logo_field.alt|default('') }}{% endif %}"
         loading="lazy"
         style="height: {{ logo_h }}px;"
       >
