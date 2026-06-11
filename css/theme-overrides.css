@@ -455,7 +455,6 @@ button:active,
   border: {{ button_secondary_border_hover }};
   color: {{ button_secondary_font_hover.color }};
   fill: {{ button_secondary_font_hover.color }};
-  font-size: {{ button_secondary_font_hover.size ~ 'px' }};
 }
 
 .button.button--secondary:active {
@@ -541,7 +540,8 @@ button:active,
 {# #############################   5. Forms   ############################## #}
 {# ######################################################################### #}
 
-form {
+form,
+.submitted-message {
   background-color: {{ form_bg_color }};
   border: {{ form_border }};
   border-radius: {{ form_corner_radius }};
@@ -550,13 +550,6 @@ form {
 
 .hs-form-field {
   margin-bottom: {{ form_field_spacing }};
-}
-
-.submitted-message {
-  background-color: {{ form_bg_color }};
-  border: {{ form_border }};
-  border-radius: {{ form_corner_radius }};
-  padding: {{ form_padding }};
 }
 
 /* Form Title */
@@ -614,18 +607,9 @@ select {
   color: transparent;
 }
 
-::-webkit-input-placeholder {
-  color: {{ form_input_placeholder_color }};
-}
-
-::-moz-placeholder {
-  color: {{ form_input_placeholder_color }};
-}
-
-:-ms-input-placeholder {
-  color: {{ form_input_placeholder_color }};
-}
-
+::-webkit-input-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder,
 ::placeholder {
   color: {{ form_input_placeholder_color }};
 }

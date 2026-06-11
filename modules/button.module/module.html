@@ -13,12 +13,7 @@
     {% endunless %}
   {% endif %}
 
-  {% set rel = (module.button_link.open_in_new_tab ? 'noopener noreferrer' : '') %}
-  {% if module.button_link.no_follow %}
-    {% set rel = rel ~ (rel ? ' nofollow' : 'nofollow') %}
-  {% endif %}
-
-  <{% if module.button_options.button_link_toggle == true %}a href="{{ href }}"{% if module.button_link.open_in_new_tab %} target="_blank" rel="{{ rel }}"{% elif rel %} rel="{{ rel }}"{% endif %}{% else %}button type="button"{% endif %}
+  <{% if module.button_options.button_link_toggle == true %}a href="{{ href }}"{% if module.button_link.open_in_new_tab %} target="_blank" rel="noopener noreferrer{% if module.button_link.no_follow %} nofollow{% endif %}"{% elif module.button_link.no_follow %} rel="nofollow"{% endif %}{% else %}button type="button"{% endif %}
     class="button {% if module.style.button_type == 'secondary' %} button--secondary{% elif module.style.button_type == 'simple' %} button--simple{% endif %} {% if module.style.button_size == 'small' %} button--small{% elif module.style.button_size == 'large' %} button--large{% endif %} {% if module.button_icon.icon_position == 'right' %} button--icon-right{% endif %}"
     id="button_{{ name }}">
 

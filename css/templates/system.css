@@ -90,18 +90,9 @@ ul.hs-search-results__listing li {
 
 /* Forms in System Pages */
 
-.systems-page form ::-webkit-input-placeholder {
-  opacity: 1;
-}
-
-.systems-page form ::-moz-placeholder {
-  opacity: 1;
-}
-
-.systems-page form :-ms-input-placeholder {
-  opacity: 1;
-}
-
+.systems-page form ::-webkit-input-placeholder,
+.systems-page form ::-moz-placeholder,
+.systems-page form :-ms-input-placeholder,
 .systems-page form :-moz-placeholder {
   opacity: 1;
 }
@@ -191,16 +182,8 @@ form#hs-membership-form {
 
 /* Membership placeholders */
 
-#hs-membership-form :-ms-input-placeholder {
-  color: #d0d0d0;
-  opacity: 0;
-}
-
-#hs-membership-form ::-moz-placeholder {
-  color: #d0d0d0;
-  opacity: 0;
-}
-
+#hs-membership-form :-ms-input-placeholder,
+#hs-membership-form ::-moz-placeholder,
 #hs-membership-form ::placeholder {
   color: #d0d0d0;
   opacity: 0;
@@ -210,14 +193,8 @@ form#hs-membership-form {
   color: transparent;
 }
 
-form#hs-membership-form .in-focus ::-moz-placeholder {
-  opacity: 1;
-}
-
-form#hs-membership-form .in-focus :-ms-input-placeholder {
-  opacity: 1;
-}
-
+form#hs-membership-form .in-focus ::-moz-placeholder,
+form#hs-membership-form .in-focus :-ms-input-placeholder,
 form#hs-membership-form .in-focus ::placeholder {
   opacity: 1;
 }

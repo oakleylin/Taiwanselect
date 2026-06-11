@@ -45,7 +45,7 @@
 {{
   {
     'target': '_blank',
-    'rel': 'noopener'
+    'rel': 'noopener noreferrer'
   }|xmlattr
 }}
 {% endmacro %}
@@ -86,6 +86,6 @@
 
 {# Main navigation wrapper #}
 
-<nav aria-label="Main menu" class="navigation-primary">
+<nav aria-label="主選單" class="navigation-primary">
   {{ renderNavigation(menu(module.primary_menu_field)) }}
 </nav>
