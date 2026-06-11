@@ -1,3 +1,15 @@
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ==========================================================================
    全螢幕輪播圖樣式
    ========================================================================== */
@@ -10,6 +22,8 @@
   overflow: hidden; /* 防止內容溢出 */
   box-sizing: border-box;
 }
+/* Slick 容器也必須撐滿高度 */
+.custom-slider,
 .slick-slide > div {
   height: 100%;
 }
@@ -19,25 +33,10 @@
   height: 100%;
   position: relative;
 }
-/* Slick 容器也必須撐滿高度 */
-.custom-slider,.slick-slide > div {
-  height: 100%;
-}
 
-/* 個別 Slide 樣式 */
-.slide-item {
-  height: 100%;
-  position: relative;
-}
 .slick-list,
 .slick-track {
   height: 100% !important;
-}
-
-/* 個別 Slide 樣式 */
-.slide-item {
-  height: 100%;
-  position: relative;
 }
 
 /* 背景圖片容器 */

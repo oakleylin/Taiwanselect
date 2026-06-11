@@ -55,12 +55,13 @@
 {% macro link(node) %}
 
 <li {{ childItemClasses() if node.children else defaultItemClasses() }}>
-  <a href="{{ node.url if node.url else 'javascript:;' }}" class="menu-link" {{ activeBranch() if node.activeBranch }} {{ activeNode() if node.activeNode }} {{ linkTarget() if node.linkTarget }}>{{ node.label }}</a>
+  <a href="{{ node.url if node.url else '#' }}" class="menu-link" {{ activeBranch() if node.activeBranch }} {{ activeNode() if node.activeNode }} {{ linkTarget() if node.linkTarget }}>{{ node.label }}</a>
 
   {% if node.children %}
   <input type="checkbox" id="{{ node.label }}" class="submenu-toggle">
   <label class="menu-arrow" for="{{ node.label }}">
-    <span class="menu-arrow-bg"></span>
+    <span class="visually-hidden">展開 {{ node.label }} 子選單</span>
+    <span class="menu-arrow-bg" aria-hidden="true"></span>
   </label>
   {{ renderNavigation(node) }}
   {% endif %}
