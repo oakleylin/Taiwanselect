@@ -55,7 +55,11 @@
 {% macro link(node) %}
 
 <li {{ childItemClasses() if node.children else defaultItemClasses() }}>
-  <a href="{{ node.url if node.url else '#' }}" class="menu-link" {{ activeBranch() if node.activeBranch }} {{ activeNode() if node.activeNode }} {{ linkTarget() if node.linkTarget }}>{{ node.label }}</a>
+  {% if node.url %}
+  <a href="{{ node.url }}" class="menu-link" {{ activeBranch() if node.activeBranch }} {{ activeNode() if node.activeNode }} {{ linkTarget() if node.linkTarget }}>{{ node.label }}</a>
+  {% else %}
+  <span class="menu-link">{{ node.label }}</span>
+  {% endif %}
 
   {% if node.children %}
   <input type="checkbox" id="{{ node.label }}" class="submenu-toggle">
