@@ -8,6 +8,6 @@
   box-sizing: border-box;
 }
 
-.disable-focus-styles :focus {
+.disable-focus-styles :focus:not(:focus-visible) {
   outline: none;
 }

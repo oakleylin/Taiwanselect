@@ -13,13 +13,13 @@
     class="logo-text {{ module.extra_class }}"
     href="{{ href }}"
     {% if open_new %}target="_blank" rel="noopener noreferrer"{% endif %}
-    {% if not module.text_field %}aria-label="{{ module.logo_field.alt|default('Logo') }}"{% endif %}
   >
     {% if module.logo_field.src %}
       <img
         class="logo-text__logo"
         src="{{ module.logo_field.src }}"
         alt="{% if module.text_field %}{% else %}{{ module.logo_field.alt|default('Logo') }}{% endif %}"
+        {% if module.text_field %}role="presentation" aria-hidden="true"{% endif %}
         loading="lazy"
         style="height: {{ logo_h }}px;"
       >
@@ -35,7 +35,7 @@
       <img
         class="logo-text__logo"
      src="{{ module.logo_field.src }}"
-     alt="{{ module.logo_field.alt|default('') }}"
+     alt="{{ module.logo_field.alt|default('Logo') }}"
      loading="lazy"
      style="height: {{ module.logo_height|default(28) }}px;"
       >
