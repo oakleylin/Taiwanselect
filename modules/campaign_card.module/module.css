@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
 .title{
   font-style: normal !important; /* 防禦主題干擾 */
-  font-family: 'Noto Sans TC'!important;
+  font-family: 'Noto Sans TC', sans-serif !important;
   font-size: 56px;
   font-weight:500;
   margin-bottom:30px;
@@ -87,7 +87,7 @@
   text-overflow: ellipsis;
   letter-spacing: -0.01em;
   font-style: normal !important; /* 防禦主題干擾 */
-  font-family: 'Noto Sans TC'!important;
+  font-family: 'Noto Sans TC', sans-serif !important;
   
 }
 

@@ -65,7 +65,7 @@
   margin-bottom: 20px;
   line-height: 1.2;
   color: #ffffff !important;
-  font-family: 'Noto Sans TC';
+  font-family: 'Noto Sans TC', sans-serif;
 }
 
 /* 副標題樣式 */

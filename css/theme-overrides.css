@@ -1260,7 +1260,7 @@ tbody + tbody {
 .blog-index__post__post-details h2,
 .blog-related-posts__post--card__post-details h2 {
   color: {{ body_font.color }};
-  font-family: {{ body_font.font }};
+  font-family: {{ body_font.font }}, sans-serif;
   font-weight: 700;
 }
 
@@ -1286,7 +1286,7 @@ tbody + tbody {
 .blog-post__body h5,
 .blog-post__body h6 {
   color: {{ headings_font.color }};
-  font-family: {{ body_font.font}}, {{ body_font.fallback }};
+  font-family: {{ body_font.font}}, {{ body_font.fallback }}, sans-serif;
   font-weight: 700;
 }
 
